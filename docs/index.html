@@ -1,0 +1,634 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3fafb"><title>GET HIRED | Module 06 — MY DIGITAL PRESENCE</title><style>
+:root{
+ --ink:#102f46;--muted:#526f7e;--teal:#087f7a;--blue:#286c9e;
+ --bg:#f3fafb;--line:#bfdfdc;--navy:#07354a;--gold:#fff2d9;
+ --paper:#fff;--soft:#e7f7f3;--shadow:0 10px 32px rgba(5,58,76,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Cairo","Noto Sans Arabic",Tahoma,Arial,sans-serif;direction:rtl;color:var(--ink);background:var(--bg)}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid #e39a28;outline-offset:2px}
+#app{height:100dvh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
+.topbar{flex:0 0 auto;min-height:58px;padding:8px clamp(10px,2vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border-bottom:1px solid #d5e9e7;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;color:#0b6870;font-size:clamp(12px,1vw,17px);white-space:nowrap}
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#0b8b85;color:#fff;font-weight:1000}
+.modebar,.top-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.modebar button,.top-actions button{border:1px solid #c5dfdc;background:#fff;color:#16485b;border-radius:10px;padding:8px 12px;font-weight:800;font-size:clamp(12px,.95vw,15px)}
+.modebar button.active{background:#0a7776;color:white;border-color:#0a7776}
+#deck{position:relative;flex:1 1 auto;min-height:0;overflow:hidden}
+.slide{display:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:radial-gradient(ellipse 75% 60% at 8% 0%,#d9f3f1,transparent 75%),linear-gradient(120deg,#f5fcfc,#fff 58%,#edf8f8);padding:clamp(16px,2.8vw,48px) clamp(16px,4vw,72px) 24px}
+.slide.active{display:flex;flex-direction:column;animation:slidein .22s ease}
+@keyframes slidein{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.slide-topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-shrink:0;font-weight:850;color:#0a6c70;font-size:clamp(11px,.95vw,16px);margin-bottom:clamp(8px,1.2vh,16px)}
+.slide-topline>div{display:flex;align-items:center;gap:8px;min-width:0}
+.slide-number{width:36px;height:36px;border:2px solid #0b8d86;border-radius:12px;display:inline-grid;place-items:center;font-weight:900;background:#fff;flex-shrink:0;direction:ltr}
+.section-label{letter-spacing:.04em;overflow-wrap:anywhere}
+.module-pill{border:1px solid #b9dcd7;background:#e8f8f5;padding:6px 12px;border-radius:999px;font-weight:850;white-space:nowrap}
+.heading{margin-bottom:clamp(10px,1.6vh,20px);flex-shrink:0}
+.heading h1{font-size:clamp(27px,3vw,54px);line-height:1.22;margin:0 0 7px;font-weight:900;letter-spacing:-.4px;overflow-wrap:anywhere}
+.subtitle{font-size:clamp(15px,1.25vw,23px);color:#4b6d7e;margin:0;line-height:1.5}
+.body{flex:1 0 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,1.5vh,20px);width:100%}
+.body>*{max-width:100%;min-width:0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(14px,1.8vw,26px);box-shadow:var(--shadow)}
+.panel h3{font-size:clamp(18px,1.45vw,27px);margin:0 0 9px}
+.panel p,.panel li{font-size:clamp(14px,1.05vw,20px);line-height:1.55;margin:4px 0}
+.panel.mint{background:#e6f7f3}.panel.blue{background:#eaf3fb}.panel.gold{background:#fff3d9}
+.grid{display:grid;gap:12px;min-width:0}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.info-card{min-width:0;background:#fff;border:1px solid #c5e2df;border-radius:16px;padding:clamp(13px,1.3vw,20px);box-shadow:0 4px 16px rgba(5,58,76,.035)}
+.info-card b{display:block;color:#0a7776;font-size:clamp(16px,1.15vw,22px);margin:5px 0}
+.info-card p{font-size:clamp(14px,1vw,19px);line-height:1.5;margin:4px 0;overflow-wrap:anywhere}
+.card-tag{display:block;color:#54717e;font-size:11px;letter-spacing:.07em;font-weight:900}
+.callout{background:#dff4ef;border-right:6px solid #078e88;border-radius:13px;padding:12px 17px;font-size:clamp(14px,1.08vw,20px);line-height:1.55}
+.callout.warning{background:#fff1df;border-color:#d98a2c;color:#67420f}
+.small-note{font-size:13px!important;color:#58727e}
+.english,.prompt-box pre,.bad,.good{font-family:Arial,sans-serif;direction:ltr;text-align:left;unicode-bidi:plaintext}
+.hero-layout{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(16px,3vw,36px);min-height:360px}
+.eyebrow{letter-spacing:.08em;color:#0d8d86;font-size:clamp(13px,1.05vw,19px);font-weight:900}
+.hero-title{font-size:clamp(34px,3.8vw,66px);line-height:1.24;margin:14px 0;font-weight:950}
+.hero-title em{font-style:normal;color:#098d87}
+.lead{font-size:clamp(17px,1.4vw,26px);color:#476a79;line-height:1.65;margin:0}
+.hero-visual{background:#fff;border:1px solid var(--line);border-radius:24px;padding:14px;box-shadow:0 12px 35px #063a4c10}
+.hero-visual svg{width:100%;height:auto;max-height:42vh;display:block}
+.visual-caption{text-align:center;color:#52727e;font-size:clamp(12px,1vw,16px);padding:8px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.tag-row span{font-size:clamp(12px,.95vw,16px);border-radius:12px;background:#dff4ef;padding:8px 11px;font-weight:850;color:#17475a}
+.outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.outcomes .step:last-child:nth-child(odd){grid-column:1/-1}
+.step{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #c7e2df;border-radius:14px;padding:10px 14px;min-width:0}
+.step>span{width:36px;height:36px;display:grid;place-items:center;flex-shrink:0;border-radius:11px;background:#0a8b85;color:#fff;font-weight:900;direction:ltr}
+.step b{font-size:clamp(15px,1.12vw,21px);color:#0a7776}
+.step p{font-size:clamp(13px,.98vw,18px);margin:2px 0;line-height:1.45}
+.session-banner{display:grid;grid-template-columns:.7fr 1.3fr;gap:12px}
+.session-banner>div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px 12px}
+.session-banner span{display:block;font-size:11px;color:#0a7776;font-weight:900;letter-spacing:.08em}
+.session-banner b{display:block;font-size:clamp(18px,1.35vw,25px);margin:2px 0}
+.session-banner small{color:#55727e;font-size:12px}
+.timeline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.timeline-row{display:grid;grid-template-columns:80px 1fr;gap:6px;align-items:center;background:#fff;border:1px solid #c5dfdc;border-radius:12px;padding:5px 8px}
+.timeline-row span{font-weight:900;color:#0a7776;direction:ltr;text-align:right}
+.timeline-row b{font-size:clamp(14px,1vw,19px)}
+.timeline-row small{grid-column:1/-1;font-size:clamp(10px,.75vw,13px);color:#55727e;line-height:1.3}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;align-items:stretch}
+.flow-item{background:#fff;border:1px solid #c5dfdc;border-radius:15px;padding:16px 12px;min-width:0;position:relative}
+.flow-item b{display:block;color:#0a7776;font-size:clamp(12px,.95vw,17px);direction:ltr;text-align:right}
+.flow-item span{display:block;font-size:clamp(13px,1vw,18px);margin-top:7px;line-height:1.45}
+.myth-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.myth-card{background:#fff;border:1px solid #c5dfdc;border-radius:16px;padding:14px;display:grid;gap:8px}
+.myth-card div{padding:10px;border-radius:12px;background:#fff4e9}
+.myth-card div+div{background:#e8f8f2}
+.myth-card span{display:block;font-size:11px;font-weight:900;color:#8b5b24;letter-spacing:.08em}
+.myth-card div+div span{color:#087f7a}
+.myth-card b{display:block;font-size:clamp(13px,1vw,18px);line-height:1.45}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.compare-card{background:#fff;border:1px solid #c5dfdc;border-radius:18px;padding:clamp(14px,1.7vw,22px);min-width:0}
+.compare-card.weak{background:#fff4e9;border-color:#e6c5a4}.compare-card.strong{background:#eaf8f2;border-color:#b8decb}
+.compare-card span{font-size:11px;font-weight:900;color:#0a7776;letter-spacing:.08em}
+.compare-card h3{font-size:clamp(17px,1.35vw,25px);margin:7px 0}
+.compare-card p{font-size:clamp(14px,1.08vw,20px);line-height:1.5;margin:0;overflow-wrap:anywhere}
+.prompt-box{background:#fff;border:1px solid #bddbd8;border-radius:18px;padding:clamp(14px,1.6vw,22px);min-width:0}
+.prompt-label{font-size:11px;letter-spacing:.08em;font-weight:900;color:#0a7776;margin-bottom:8px;direction:ltr;text-align:left}
+.prompt-box pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:clamp(14px,1.08vw,20px);line-height:1.5;margin:0 0 12px;color:#16384d}
+.copy-btn,.primary-btn{border:1px solid #0a7776;background:#0a7776;color:#fff;border-radius:10px;padding:8px 14px;font-weight:850;font-size:14px}
+.copy-btn{background:#fff;color:#0a7776}
+.copy-btn:disabled{opacity:.45;cursor:not-allowed}
+.builder{display:grid;gap:12px}
+.builder-intro p{margin:4px 0}
+.builder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.builder-grid label{display:grid;gap:5px;font-size:13px;font-weight:850;color:#28576a}
+.builder-grid input{width:100%;min-width:0;border:1px solid #bfd9d7;border-radius:10px;padding:10px;background:#fff;color:var(--ink);direction:auto}
+.generated-prompt{background:#f4fafb;border:1px dashed #9fcac5;border-radius:12px;padding:12px;min-height:48px;white-space:pre-wrap;direction:ltr;text-align:left;font:14px/1.5 Arial,sans-serif;overflow-wrap:anywhere}
+.mistake-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mistake{background:#fff;border:1px solid #c5dfdc;border-radius:16px;padding:14px;min-width:0}
+.mistake>span{font-size:11px;color:#0a7776;font-weight:900}
+.mistake p{font-size:clamp(13px,1vw,18px);line-height:1.45;padding:8px;border-radius:9px;overflow-wrap:anywhere}
+.mistake .bad{background:#fff1e8;color:#7b3e24}.mistake .good{background:#e8f8f2;color:#15584f}
+.checklist-box{background:#fff;border:1px solid #c5dfdc;border-radius:18px;padding:16px}
+.checklist-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.checklist-head b{font-size:clamp(15px,1.2vw,22px);color:#0a7776}
+.checklist-head span{font-weight:900;direction:ltr}
+.checklist-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.check-item{display:flex;align-items:center;gap:9px;border:1px solid #d3e6e3;border-radius:10px;padding:8px;min-width:0}
+.check-item input{width:18px;height:18px;accent-color:#0a8b85;flex-shrink:0}
+.check-item span{color:#0a7776;font-weight:900;font-size:12px}
+.check-item b{font-size:clamp(13px,.95vw,17px);overflow-wrap:anywhere}
+.progress-track{height:8px;background:#e4f0ef;border-radius:99px;overflow:hidden;margin-top:12px}
+.progress-track span{display:block;height:100%;width:0;background:#0a8b85;transition:width .15s}
+.quiz-wrap{display:grid;gap:12px}
+.quiz-q{background:#fff;border:1px solid #c5dfdc;border-radius:16px;padding:14px}
+.quiz-q h3{font-size:clamp(15px,1.1vw,21px);margin:0 0 10px}
+.quiz-q button{display:block;width:100%;text-align:right;border:1px solid #c8dfdc;background:#f9fcfc;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:clamp(13px,.95vw,17px);color:#173d50}
+.quiz-q button.correct{background:#e2f6ec;border-color:#59ad82}.quiz-q button.incorrect{background:#fff0e9;border-color:#dc9270}
+.feedback{font-size:13px;font-weight:800;color:#0a7776;min-height:18px;margin:6px 0 0}
+.mistake .good,.mistake .bad{margin:6px 0}
+.closing-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.closing-grid>div{background:#fff;border:1px solid #c5dfdc;border-radius:14px;padding:14px;text-align:center}
+.closing-grid b{display:block;color:#0a7776;font-size:clamp(12px,.9vw,16px);direction:ltr}
+.closing-grid span{display:block;font-size:clamp(13px,1vw,17px);margin-top:5px}
+.closing-line{text-align:center;font-size:clamp(22px,2vw,36px);line-height:1.35;margin:0;color:#0a5260}
+
+
+
+
+
+
+
+
+
+
+
+.study-extra,.trainer-note{display:none;margin-top:12px;border-radius:12px;padding:12px 15px;font-size:14px;line-height:1.55}
+.study-extra{background:#edf5fb;border-right:5px solid #4b8eb4;color:#244d64}
+.trainer-note{background:#fff4df;border-right:5px solid #d79a3a;color:#624719}
+body.mode-study .study-extra,body.mode-trainer .study-extra{display:block}
+body.mode-trainer .trainer-note{display:block}
+body.mode-study .slide{background:linear-gradient(120deg,#f7fbfd,#fff 60%,#f1f9f8)}
+body.mode-trainer .slide{background:linear-gradient(120deg,#fffaf0,#fff 60%,#f2f9f8)}
+.navbar{flex:0 0 auto;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px clamp(10px,2vw,28px);background:#fff;border-top:1px solid #d5e9e7}
+.navbar button{border:1px solid #c5dfdc;background:#fff;color:#16485b;border-radius:10px;padding:9px 14px;font-weight:850;white-space:nowrap}
+.navbar button.primary{background:#0a7776;color:#fff;border-color:#0a7776}
+.navbar button:disabled{opacity:.35;cursor:not-allowed}
+.nav-center{display:flex;align-items:center;gap:12px;flex:1;max-width:650px;min-width:0}
+.progress{height:8px;background:#e1efed;border-radius:99px;overflow:hidden;flex:1;min-width:40px}
+.progress span{display:block;height:100%;background:#0a8b85;width:0;transition:width .2s}
+.time-ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}.counter{font-weight:900;color:#496d7d;white-space:nowrap;direction:ltr;unicode-bidi:isolate}
+#mode-label{font-size:12px;color:#58727e;white-space:nowrap}
+#overview-panel{display:none;position:fixed;inset:0;z-index:20;background:#082b41b8;padding:clamp(12px,3vw,36px);overflow:auto}
+.overview-inner{max-width:1050px;margin:0 auto;background:#fff;border-radius:20px;padding:18px;box-shadow:0 20px 70px #001b2b55}
+.overview-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.overview-head h2{font-size:22px;margin:0}
+.overview-head input{flex:1;min-width:180px;border:1px solid #c5dfdc;border-radius:10px;padding:9px}
+.overview-head button{border:1px solid #c5dfdc;border-radius:10px;padding:8px 12px;background:#fff;color:#16485b;font-weight:800}
+.overview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.overview-grid button{display:flex;align-items:flex-start;gap:10px;text-align:right;border:1px solid #d6e8e5;background:#fbfefe;border-radius:10px;padding:9px;color:#163e52;font-size:14px}
+.overview-grid button small{font-weight:900;color:#0a7776;direction:ltr}
+.toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%);background:#07354a;color:#fff;border-radius:99px;padding:8px 14px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .15s;z-index:30}
+.toast.show{opacity:1}
+@media(max-width:1050px){
+ .hero-layout{grid-template-columns:1fr}.hero-layout>div:first-child{order:2}.hero-layout>div:last-child{order:1}.hero-visual{padding:8px}.hero-visual svg{max-height:18vh}
+ .body{justify-content:flex-start}
+ .slide{padding:18px 22px 24px}
+ .timeline-row{grid-template-columns:80px 1fr}.timeline-row small{grid-column:1/-1}
+ .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:1300px) and (min-width:761px){.checklist-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.check-item{padding:6px;gap:5px}.check-item b{font-size:13px}}
+@media(max-width:760px){
+ .topbar{flex-wrap:wrap;justify-content:space-between;gap:6px;padding:6px 8px}
+ .brand{width:auto;justify-content:flex-start;font-size:11px}
+ .modebar{order:3;flex-basis:100%;justify-content:center}
+ .top-actions{justify-content:flex-end}
+ .hero-visual{display:none}
+ .topbar .modebar button,.topbar .top-actions button{padding:6px 9px;font-size:12px}
+ .grid-2,.grid-3,.compare,.session-banner,.myth-grid,.mistake-grid{grid-template-columns:1fr}.hero-visual{display:none}
+ .closing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .slide{padding:14px 13px 20px}
+ .heading h1{font-size:clamp(25px,6vw,39px)}
+ .subtitle{font-size:15px}
+ .navbar{min-height:0;flex-wrap:nowrap;padding:6px 8px;gap:6px}
+ .nav-center{order:0;flex:1;max-width:none;gap:6px}
+ #mode-label{display:none}
+ .navbar button{padding:6px 8px;font-size:12px}
+ .body p,.body li{font-size:16px}.outcomes{grid-template-columns:1fr}.outcomes .step:last-child:nth-child(odd){grid-column:auto}
+ .flow{grid-template-columns:1fr}
+ .flow-item{padding:12px}
+ .builder-grid{grid-template-columns:1fr}
+ .checklist-grid{grid-template-columns:1fr}
+ .overview-grid{grid-template-columns:1fr}
+ .overview-head{align-items:stretch}
+ .overview-head input{flex-basis:100%}
+ .session-banner{grid-template-columns:1fr}
+ .timeline{grid-template-columns:1fr}.timeline-row{grid-template-columns:75px 1fr}.checklist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-height:700px) and (min-width:761px){
+ .slide{padding-top:12px;padding-bottom:14px}
+ .heading{margin-bottom:8px}
+ .body{justify-content:flex-start}
+ .panel{padding:13px}
+ .hero-visual svg{max-height:28vh}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{
+ .topbar,.navbar,#overview-panel,.toast{display:none!important}
+ #app{height:auto;overflow:visible}
+ #deck{overflow:visible;height:auto}
+ .slide{display:block!important;position:relative;inset:auto;overflow:visible;min-height:95vh;page-break-after:always}
+ .study-extra,.trainer-note{display:block}
+}
+
+
+/* Revision: larger projector typography and running case outputs */
+@media(min-width:1051px){.case-facts{grid-template-columns:repeat(3,minmax(0,1fr))!important}.case-facts .info-card{min-height:0!important;padding:12px 15px!important}.case-facts .info-card small{font-size:15px!important;line-height:1.4!important}.case-facts .info-card p{margin:3px 0!important}}
+.heading h1{font-size:clamp(34px,3.5vw,62px)!important;line-height:1.18!important}
+.subtitle{font-size:clamp(18px,1.45vw,24px)!important;line-height:1.55!important}
+.body p,.body li,.body td,.body th,.body small{font-size:clamp(18px,1.35vw,23px)!important;line-height:1.58!important}
+.body h2,.body h3{font-size:clamp(22px,1.8vw,31px)!important;line-height:1.3!important}
+.info-card{padding:clamp(16px,1.5vw,24px)!important}
+.info-card p{font-size:clamp(18px,1.35vw,23px)!important;line-height:1.55!important}
+.info-card b{font-size:clamp(19px,1.45vw,25px)!important}
+.info-card small{font-size:clamp(16px,1.1vw,19px)!important;line-height:1.5!important;display:block}
+.callout{font-size:clamp(18px,1.3vw,22px)!important;line-height:1.6!important;padding:15px 20px!important}
+.study-extra,.trainer-note{font-size:clamp(16px,1.1vw,19px)!important;line-height:1.6!important}
+.slide-topline{font-size:clamp(13px,1vw,17px)!important}
+.cv-result-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.75fr);gap:18px;align-items:stretch;width:100%}
+.cv-paper{background:#fff;border:1px solid #c9dddf;border-radius:18px;padding:clamp(20px,2.1vw,34px);box-shadow:0 8px 26px rgba(5,58,76,.08);min-width:0;color:#19374a}
+.cv-paper-kicker{font-size:14px!important;font-weight:900;letter-spacing:.08em;color:#087f7a;border-bottom:2px solid #d9ece9;padding-bottom:10px;margin-bottom:16px;direction:ltr;text-align:left}
+.cv-name{font-size:clamp(27px,2.5vw,38px)!important;line-height:1.2!important;font-weight:950;color:#123b55;margin-bottom:8px;direction:ltr;text-align:left}
+.cv-contact{font-size:clamp(15px,1.15vw,19px)!important;line-height:1.5!important;color:#506b7a;margin:3px 0 8px;direction:ltr;text-align:left;overflow-wrap:anywhere}
+.cv-section-heading{font-size:clamp(17px,1.35vw,22px)!important;line-height:1.3!important;font-weight:950;color:#087f7a;border-bottom:1px solid #b9dcd7;padding:12px 0 5px;margin:10px 0 8px;letter-spacing:.035em;direction:ltr;text-align:left}
+.cv-item-title{font-size:clamp(19px,1.45vw,24px)!important;font-weight:900;line-height:1.4!important;direction:ltr;text-align:left;color:#19374a;margin-top:5px}
+.cv-item-meta{font-size:clamp(16px,1.15vw,19px)!important;line-height:1.5!important;color:#5a7280;direction:ltr;text-align:left;margin:4px 0 8px}
+.cv-output-text{font-size:clamp(18px,1.35vw,23px)!important;line-height:1.6!important;direction:ltr;text-align:left;color:#213f52;margin:7px 0}
+.cv-output-list{direction:ltr;text-align:left;padding-left:24px;margin:8px 0}
+.cv-output-list li{font-size:clamp(18px,1.3vw,22px)!important;line-height:1.55!important;margin:5px 0}
+.cv-explain{background:#eaf6f5;border:1px solid #c4e3de;border-radius:18px;padding:clamp(18px,1.8vw,28px);min-width:0;display:flex;flex-direction:column;gap:12px}
+.cv-explain-label{font-size:clamp(20px,1.55vw,26px)!important;font-weight:950;color:#0a6d70}
+.cv-explain p,.cv-explain li{font-size:clamp(18px,1.25vw,21px)!important;line-height:1.6!important}
+.cv-proof{margin-top:auto;border-top:1px solid #c4dfdb;padding-top:12px}
+.cv-proof b{font-size:16px!important;color:#087f7a;letter-spacing:.06em}
+.cv-empty-state{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px dashed #9bbfc0;border-radius:12px;background:#f7fbfb;direction:ltr;text-align:left}
+.cv-empty-state strong{font-size:clamp(18px,1.4vw,23px)!important}
+.cv-empty-state span{font-size:clamp(16px,1.15vw,19px)!important;color:#5c7480}
+.cv-full-paper{max-width:920px;margin-inline:auto}
+.cv-full-paper .cv-section-heading{margin-top:8px;padding-top:8px}
+.cv-cert-note{font-size:15px!important;color:#607886;border-top:1px dashed #c5d7d8;margin-top:12px;padding-top:8px;direction:ltr;text-align:left}
+.cv-ar-list{padding-right:22px;margin:0}
+.case-intro-banner{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 16px;background:#e7f6f3;border:1px solid #b9ddd7;border-radius:14px;color:#0a6870}
+.case-intro-banner strong{font-size:clamp(17px,1.3vw,22px)!important;direction:ltr}
+.case-intro-banner span{font-size:clamp(16px,1.15vw,19px)!important}
+.case-rule{margin-top:4px;padding:8px 14px!important;font-size:16px!important;line-height:1.35!important}
+.case-facts .info-card{min-height:128px}
+.sample-weak,.sample-strong{font-size:clamp(18px,1.35vw,22px)!important;line-height:1.6!important}
+.tag-bad,.tag-good{display:inline-block;font-size:14px!important;font-weight:900;padding:5px 9px;border-radius:8px;margin-bottom:8px}
+.tag-bad{background:#fff0e9;color:#a04a2d}.tag-good{background:#e6f6ed;color:#176b49}
+.cv-final-paper{max-width:920px}
+@media(max-width:900px){.cv-result-layout{grid-template-columns:1fr}.cv-explain{gap:8px}.cv-paper{padding:18px}}
+@media(max-width:760px){
+ .heading h1{font-size:clamp(29px,7vw,38px)!important}
+ .subtitle{font-size:18px!important}
+ .body p,.body li,.body td,.body th{font-size:17px!important;line-height:1.55!important}
+ .info-card p{font-size:17px!important}.info-card b{font-size:18px!important}.info-card small{font-size:15px!important}
+ .callout{font-size:17px!important;padding:12px 14px!important}
+ .cv-name{font-size:28px!important}.cv-section-heading{font-size:17px!important}.cv-output-text,.cv-output-list li{font-size:17px!important}
+ .cv-item-title{font-size:18px!important}.cv-contact,.cv-item-meta{font-size:15px!important}
+ .case-facts{grid-template-columns:1fr!important}
+}
+
+
+/* Module 06 portfolio-specific visual system */
+.portfolio-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:stretch}
+.portfolio-flow .flow-item{border-top:5px solid #0a8b85;min-height:112px}
+.portfolio-flow .flow-item:nth-child(2){border-top-color:#286c9e}
+.portfolio-flow .flow-item:nth-child(3){border-top-color:#d89a32}
+.portfolio-flow .flow-item:nth-child(4){border-top-color:#527a61}
+.portfolio-type{min-height:175px;display:flex;flex-direction:column;gap:8px}
+.portfolio-type .type-icon{width:46px;height:46px;border-radius:14px;background:#e5f5f2;display:grid;place-items:center;font-size:25px}
+.portfolio-type p{margin-top:auto!important}
+.portfolio-sheet{background:#fff;border:1px solid #cbdde1;border-radius:14px;box-shadow:0 8px 24px rgba(5,58,76,.09);padding:clamp(15px,1.5vw,24px);color:#17384c;min-width:0;min-height:350px;position:relative;overflow:hidden}
+.portfolio-sheet:before{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:linear-gradient(90deg,#0a7776 0 40%,#286c9e 40% 75%,#e3b44f 75%)}
+.portfolio-sheet .sheet-kicker{font-size:12px!important;letter-spacing:.12em;color:#0a7776;font-weight:900;direction:ltr;text-align:left;margin:8px 0 10px}
+.portfolio-sheet h3{font-size:clamp(21px,1.7vw,30px)!important;line-height:1.2!important;margin:0 0 6px;color:#123a53}
+.portfolio-sheet .sheet-sub{font:600 clamp(12px,1vw,16px)/1.4 Arial,sans-serif!important;color:#607887;direction:ltr;text-align:left;margin:0 0 14px}
+.portfolio-sheet .sheet-section{font-size:clamp(12px,.95vw,16px)!important;letter-spacing:.07em;font-weight:950;color:#087f7a;border-bottom:1px solid #cfe3e1;padding:8px 0 4px;margin:10px 0 5px;direction:ltr;text-align:left}
+.portfolio-sheet p,.portfolio-sheet li{font:clamp(12px,.95vw,16px)/1.5 Arial,sans-serif!important;color:#294b60;direction:ltr;text-align:left;margin:4px 0}
+.portfolio-sheet .sheet-chip{display:inline-block;border:1px solid #c9e1df;background:#eff8f6;border-radius:999px;padding:5px 9px;margin:3px;font:700 12px Arial,sans-serif;color:#15556a}
+.portfolio-sheet .project-card{background:#f3f8fb;border-left:4px solid #286c9e;border-radius:8px;padding:9px 11px;margin:7px 0}
+.portfolio-sheet .placeholder{border:1px dashed #9bbfc0;border-radius:8px;padding:8px 10px;color:#68808b;background:#fafdfd;font:italic 12px Arial,sans-serif;margin:6px 0}
+.portfolio-sheet .sheet-footer{position:absolute;bottom:12px;left:18px;right:18px;border-top:1px solid #e0ebed;padding-top:6px;display:flex;justify-content:space-between;color:#81939b;font:10px Arial,sans-serif;direction:ltr}
+.sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch;direction:ltr}
+.portfolio-result{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:16px;align-items:stretch}
+.portfolio-result-note{background:#eaf7f4;border:1px solid #c3e1db;border-radius:16px;padding:clamp(14px,1.5vw,22px);display:flex;flex-direction:column;gap:8px}
+.portfolio-result-note h3{font-size:clamp(20px,1.5vw,27px)!important;margin:0;color:#0a6f70}
+.portfolio-result-note p,.portfolio-result-note li{font-size:clamp(16px,1.15vw,20px)!important;line-height:1.5!important}
+.prompt-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.prompt-step{background:#fff;border:1px solid #c5dfdc;border-radius:14px;padding:14px;min-width:0}
+.prompt-step strong{display:block;color:#0a7776;font-size:clamp(16px,1.2vw,21px);margin-bottom:6px}
+.prompt-step p{font-size:clamp(15px,1.05vw,19px)!important}
+.design-demo{display:grid;grid-template-columns:.9fr 1.1fr;gap:14px;align-items:center}
+.design-board{background:#eaf4f7;border:1px solid #c6dce1;border-radius:18px;padding:16px;display:grid;gap:9px}
+.design-board .block{border-radius:9px;padding:12px;background:white;border:1px solid #d1e0e3}
+.design-board .block.dark{background:#103d58;color:white}
+.design-board .block.teal{background:#e1f4ef;border-color:#b9ded6}
+.design-board .block.gold{background:#fff3d9;border-color:#ecd6a7}
+.design-board .line{height:8px;border-radius:9px;background:#d4e3e7;margin:7px 0}
+.design-board .line.short{width:55%}
+.activity-step{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #c7e2df;border-radius:14px;padding:12px 14px}
+.activity-step .n{width:38px;height:38px;display:grid;place-items:center;background:#0a7776;color:#fff;border-radius:11px;font-weight:950;flex-shrink:0;direction:ltr}
+.activity-step b{display:block;font-size:clamp(17px,1.2vw,22px);color:#0a6d70}
+.activity-step p{margin:3px 0;font-size:clamp(15px,1.05vw,19px)!important}
+.peer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.portfolio-result .portfolio-sheet,.sheet-grid .portfolio-sheet{min-height:0;padding:14px 17px 30px}
+.portfolio-result .portfolio-sheet .sheet-kicker,.sheet-grid .portfolio-sheet .sheet-kicker{margin:5px 0 7px}
+.portfolio-result .portfolio-sheet .sheet-section,.sheet-grid .portfolio-sheet .sheet-section{font-size:12px!important;margin:6px 0 3px;padding:5px 0 3px}
+.portfolio-result .portfolio-sheet p,.sheet-grid .portfolio-sheet p{font-size:13px!important;line-height:1.38!important;margin:3px 0}
+.portfolio-result .portfolio-sheet .project-card,.sheet-grid .portfolio-sheet .project-card{padding:6px 8px;margin:5px 0}
+.portfolio-result .portfolio-sheet .placeholder,.sheet-grid .portfolio-sheet .placeholder{padding:5px 8px;margin:4px 0;font-size:11px!important}
+.portfolio-result .portfolio-sheet .sheet-footer,.sheet-grid .portfolio-sheet .sheet-footer{bottom:7px}
+
+.peer-item{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #d0e4e1;border-radius:11px;padding:10px;min-width:0}
+.peer-item input{width:20px;height:20px;accent-color:#0a8b85;flex-shrink:0;margin-top:3px}
+.peer-item span{font-size:clamp(15px,1.05vw,18px);line-height:1.4}
+.badge-quest{background:linear-gradient(120deg,#fff5d9,#fff);border:1px solid #ead7a2;border-radius:16px;padding:16px;display:flex;gap:14px;align-items:center}
+.badge-quest .star{font-size:38px;color:#c18a24}
+.badge-quest b{font-size:clamp(19px,1.4vw,25px);color:#6c4b12}
+.quiz-q button{text-align:right}
+@media(max-width:1050px){.portfolio-result{grid-template-columns:1fr}.design-demo{grid-template-columns:1fr}.portfolio-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ .sheet-grid{grid-template-columns:1fr}.portfolio-sheet{min-height:330px}
+ .portfolio-flow{grid-template-columns:1fr 1fr}.prompt-steps{grid-template-columns:1fr}
+ .peer-grid{grid-template-columns:1fr}.portfolio-type{min-height:0}
+ .portfolio-sheet h3{font-size:23px!important}.portfolio-sheet p,.portfolio-sheet li{font-size:14px!important}
+}
+@media(max-width:430px){.portfolio-flow{grid-template-columns:1fr}.portfolio-sheet{padding:15px}}
+</style></head><body data-mode="presentation"><div id="app">
+<header class="topbar"><div class="brand"><span class="brand-mark">GH</span><span>GET HIRED · MODULE 06</span></div><nav class="modebar" aria-label="Presentation modes"><button class="active" data-mode="presentation">العرض</button><button data-mode="study">مذاكرة الطالب</button><button data-mode="trainer">المدرّب</button></nav><div class="top-actions"><button id="overview">الفهرس</button><button id="fullscreen">ملء الشاشة</button></div></header>
+<main id="deck"><section class="slide" data-title="Portfolio Building with Canva AI &amp; AI Writing Tools" data-section="OPENING · MY DIGITAL PRESENCE" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">01</span><span class="section-label">GET HIRED · MODULE 06 · OPENING · MY DIGITAL PRESENCE</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Portfolio Building with Canva AI & AI Writing Tools</h1><p class="subtitle" dir="auto">من مشروع حقيقي إلى ملف أعمال رقمي يعرض ما تستطيع إثباته</p></div>
+<main class="body" dir="rtl"><div class="hero-layout"><div class="hero-visual"><svg role="img" aria-label="Two-page portfolio workflow" viewBox="0 0 520 300"><rect x="28" y="24" width="464" height="250" rx="24" fill="#e8f4fb"/><rect x="112" y="55" width="125" height="184" rx="9" fill="#fff" stroke="#9fc9cc" stroke-width="3"/><rect x="254" y="55" width="125" height="184" rx="9" fill="#fff" stroke="#9fc9cc" stroke-width="3"/><path d="M130 88h88M130 106h70M130 132h88M130 151h76M130 176h88M272 88h88M272 106h70M272 132h88M272 151h76M272 176h88" stroke="#c6d9df" stroke-width="7" stroke-linecap="round"/><path d="M130 70h58" stroke="#087f7a" stroke-width="8" stroke-linecap="round"/><path d="M272 70h58" stroke="#286c9e" stroke-width="8" stroke-linecap="round"/><circle cx="420" cy="205" r="35" fill="#0a8b85"/><path d="M403 205l12 12 23-27" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="260" y="32" text-anchor="middle" fill="#0a7776" font-size="15" font-weight="700">EVIDENCE → DESCRIPTION → DESIGN → SHARE</text></svg><div class="visual-caption">Canva AI · ChatGPT · Gemini · claud · Gamma.app</div></div><div><div class="eyebrow">GET HIRED · MODULE 06 · MY DIGITAL PRESENCE</div><h2 class="hero-title">حوّل مشروعك إلى <em>دليل مرئي</em></h2><p class="lead">لا نكتفي بقول إن لدينا مهارة؛ نعرض مشروعًا أو عملًا أو إنجازًا يوضح أين استخدمناها.</p><div class="tag-row"><span>Professional Portfolio</span><span>Project Description</span><span>Canva AI</span><span>Gamma.app</span><span>★ Portfolio Builder Badge Quest</span></div></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه الجلسة مخصصة لبناء مسودة Portfolio رقمية من صفحتين على الأقل باستخدام Canva وأوصاف مشروعات بمساعدة أدوات الذكاء الاصطناعي. الملف يعرض أدلة على العمل، لا مجرد قائمة مهارات.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> ابدأ بسؤال: إذا كتب شخص في سيرته أنه يجيد Excel، فما الذي يمكن أن يراه صاحب العمل ليفهم كيف استخدم هذه المهارة؟ لا تبدأ بفتح Canva قبل أن تتضح الأدلة.</div>
+</section><section class="slide" data-title="الحالة التي سنبني عليها" data-section="CASE STUDY · MARYAM AHMED" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">02</span><span class="section-label">GET HIRED · MODULE 06 · CASE STUDY · MARYAM AHMED</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">الحالة التي سنبني عليها</h1><p class="subtitle" dir="auto">سنكمل مع مريم أحمد من Module 05 بدل إنشاء حالة جديدة</p></div>
+<main class="body" dir="rtl"><div class="case-intro-banner"><strong>CASE FILE · MARYAM AHMED</strong><span>حالة افتراضية مستمرة من الوحدة السابقة</span></div><div class="grid grid-3 case-facts"><div class="info-card "><span class="card-tag">PROFILE · الملف المهني</span><b>Commerce Graduate</b><p>خريجة تجارة حديثة، تستهدف وظيفة مبتدئة في مجال العمليات.</p></div><div class="info-card "><span class="card-tag">PROJECT · المشروع المتاح</span><b>Sales Records Organisation</b><p>مشروع جامعي نظّمت فيه سجلات مبيعات باستخدام Excel وأعدّت جدولًا ملخصًا.</p></div><div class="info-card "><span class="card-tag">SKILLS · المهارات المثبتة</span><b>Basic Excel · Data Organisation</b><p>مهارتان مرتبطتان مباشرة بالمهمة التي نفذتها.</p></div><div class="info-card "><span class="card-tag">OTHER EVIDENCE</span><b>Not confirmed</b><p>لا توجد في ملف الحالة معلومات مؤكدة عن تطوع أو شهادات أو عينات كتابة أو تصميم.</p></div><div class="info-card "><span class="card-tag">PORTFOLIO TARGET</span><b>2-page draft</b><p>سنصمم مسودة من صفحتين ونوضح ما يحتاج إلى أدلة إضافية.</p></div><div class="info-card "><span class="card-tag">RULE</span><b>No invented evidence</b><p>لا نخترع مشروعًا ثانيًا أو شهادة أو نتيجة رقمية لإكمال الشكل.</p></div></div><div class="callout "><b>استمرارية الحالة:</b> استخدمنا نفس المشروع الذي ظهر في CV مريم، وسنحوّله الآن إلى Portfolio Project Card.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه الحالة ليست متدربة حقيقية. البيانات المحددة هي فقط: خريجة تجارة، مشروع تنظيم سجلات مبيعات باستخدام Excel، جدول ملخص، Basic Excel وData Organisation. لا توجد معلومات مؤكدة عن شهادات أو تطوع أو مشروعات أخرى.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب تمييز الحقائق المؤكدة عن البيانات الناقصة. لا تسمح بإضافة مشروع ثانٍ لمجرد أن المصدر يذكر 2–3 مشروعات في هيكل الـPortfolio.</div>
+</section><section class="slide" data-title="ما الذي يخص جلسة AI Tools؟" data-section="SESSION BOUNDARY" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">03</span><span class="section-label">GET HIRED · MODULE 06 · SESSION BOUNDARY</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">ما الذي يخص جلسة AI Tools؟</h1><p class="subtitle" dir="auto">نلتزم بالمخرج المطلوب ولا نخلط بين المسارات</p></div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card "><span class="card-tag">AI TOOLS SESSION</span><b>Digital Portfolio</b><p>Canva AI + AI-generated project descriptions + PDF / online sharing</p></div><div class="info-card "><span class="card-tag">COMMUNICATION & SOFT SKILLS</span><b>Digital Audit</b><p>تقييم الحضور الرقمي الشخصي وخطة تحسينه — خارج مخرج هذه الجلسة.</p></div><div class="info-card "><span class="card-tag">BUSINESS ENGLISH</span><b>Professional Bio & LinkedIn About</b><p>كتابة Bio وLinkedIn About ومراجعة اللغة — جلسة مستقلة في المصدر.</p></div></div><div class="callout ">تركيزنا هنا: <b>2-page digital portfolio draft</b>. لن ننفذ Digital Audit أو Professional Bio أو LinkedIn About باعتبارها مخرجات AI Tools.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> الصفحتان 18–19 من المصدر تعرضان أكثر من مسار في اليوم نفسه. جلسة AI Tools هي جزء Portfolio Building فقط. بقية المخرجات تظل ضمن جلساتها الأصلية.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> عند عرض الملف اليومي الكامل، أشر إلى أن Professional Bio وLinkedIn About وDigital Audit موجودة في المصدر، لكن لا تطلبها ضمن تقييم مخرج AI Tools لهذه الوحدة.</div>
+</section><section class="slide" data-title="المخرج الرسمي للجلسة" data-section="OFFICIAL DELIVERABLE" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">04</span><span class="section-label">GET HIRED · MODULE 06 · OFFICIAL DELIVERABLE</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">المخرج الرسمي للجلسة</h1><p class="subtitle" dir="auto">ما الذي يجب أن يكون في يد المتدرب بعد التطبيق؟</p></div>
+<main class="body" dir="rtl"><div class="panel blue"><div class="eyebrow">DAILY DELIVERABLES & OUTCOMES</div><h2 style="font-size:clamp(28px,2.5vw,42px);margin:8px 0">2-page digital portfolio draft</h2><p><b>Canva + AI-generated descriptions</b></p><p>مسودة ملف أعمال رقمي من صفحتين على الأقل، صُممت في Canva، وتضم أوصاف مشروعات تمت صياغتها بمساعدة AI ثم مراجعتها بشريًا.</p></div><div class="grid grid-3"><div class="info-card "><span class="card-tag">BUILD</span><b>صفحتان على الأقل</b><p>تحتويان على هيكل واضح ومحتوى أولي قابل للتطوير.</p></div><div class="info-card "><span class="card-tag">DESCRIBE</span><b>Project Descriptions</b><p>أوصاف مهنية قصيرة مرتبطة بمشروعات حقيقية.</p></div><div class="info-card "><span class="card-tag">DESIGN</span><b>Canva</b><p>اختيار قالب وألوان وتخطيط يخدم المحتوى.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المخرج الرسمي كما ورد في الصفحة 19: 2-page digital portfolio draft (Canva, AI-generated descriptions). لا أضيف Bio أو LinkedIn About إلى هذا المخرج.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اجعل المخرج مرئيًا من البداية. في نهاية الجلسة، اطلب من كل متدرب إظهار صفحتين فعليتين، وليس مجرد Prompt أو صفحة Canva فارغة.</div>
+</section><section class="slide" data-title="أهداف التعلم" data-section="LEARNING OUTCOMES" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">05</span><span class="section-label">GET HIRED · MODULE 06 · LEARNING OUTCOMES</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">أهداف التعلم</h1><p class="subtitle" dir="auto">المهارات التي سنحتاجها لإنتاج المسودة</p></div>
+<main class="body" dir="rtl"><div class="outcomes"><div class="step"><span>01</span><div><b>يفهم Portfolio</b><p>يشرح معنى ملف الأعمال والفرق بين أنواعه الثلاثة المذكورة في المصدر.</p></div></div><div class="step"><span>02</span><div><b>يختار أدلة مناسبة</b><p>يحدد مشروعًا أو شهادة أو عملًا حقيقيًا يصلح للعرض.</p></div></div><div class="step"><span>03</span><div><b>يكتب وصف مشروع</b><p>يستخدم Prompt المصدر لإنتاج وصف من ثلاث جمل بالإنجليزية.</p></div></div><div class="step"><span>04</span><div><b>يصمم صفحتين</b><p>يختار Canva template وألوانًا وتخطيطًا مناسبًا.</p></div></div><div class="step"><span>05</span><div><b>يحفظ ويشارك</b><p>يصدر PDF ويتحقق من رابط المشاركة وصلاحياته.</p></div></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه أهداف تعليمية مشتقة من موضوعات جلسة AI Tools. المخرج الرسمي يظل مسودة Portfolio من صفحتين.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اربط كل هدف بدليل ملاحظ: نوع Portfolio يحدده المتدرب، وصف مشروع من ثلاث جمل، صفحتان مصممتان، وملف أو رابط قابل للفتح.</div>
+</section><section class="slide" data-title="ما هو Professional Portfolio؟" data-section="PORTFOLIO · FOUNDATION" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">06</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO · FOUNDATION</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">ما هو Professional Portfolio؟</h1><p class="subtitle" dir="auto">ملف منظم يعرض نماذج من العمل والمهارات والإنجازات</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel mint"><div class="eyebrow">PROFESSIONAL PORTFOLIO</div><h2>دليل مرئي على ما تستطيع فعله</h2><p>يجمع نماذج مختارة من أعمالك أو مشروعاتك أو إنجازاتك، ويضع بجانب كل عنصر سياقًا يوضح ما هو وما المهارة التي يعرضها.</p></div><div class="panel"><h3>ماذا يرى الزائر؟</h3><ul><li>ما الذي أنجزته؟</li><li>ما دورك أو مساهمتك؟</li><li>ما المهارة التي استخدمتها؟</li><li>ما الدليل أو المخرج الذي يمكن مشاهدته؟</li></ul></div></div><div class="callout ">Portfolio ليس مجرد ألوان وصور. التصميم يساعد على القراءة، لكن <b>المحتوى والأدلة</b> هما ما يمنحانه قيمة.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يطلب تعريف Professional Portfolio وأنواعه، ثم بناء ملف رقمي. هذا الشرح يفسر الفكرة تعليميًا دون إضافة نوع جديد.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض مثالًا سريعًا لمشروع جامعي. اسأل: ما الذي يجعل هذا المشروع دليلًا على مهارة؟ وجّه الطلاب إلى المخرج نفسه لا إلى الوصف العام فقط.</div>
+</section><section class="slide" data-title="Portfolio وCV: ما الفرق؟" data-section="PORTFOLIO · FOUNDATION" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">07</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO · FOUNDATION</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Portfolio وCV: ما الفرق؟</h1><p class="subtitle" dir="auto">وثيقتان متكاملتان لكنهما لا تؤديان الوظيفة نفسها</p></div>
+<main class="body" dir="rtl"><div class="compare"><div class="compare-card weak"><span>CV · SUMMARY</span><h3>ملخص منظم</h3><p>يعرض التعليم والخبرات والمهارات والبيانات المهنية في صورة مختصرة قابلة للمراجعة السريعة.</p><ul><li>ما خلفيتك؟</li><li>ما المهارات والخبرات التي تذكرها؟</li></ul></div><div class="compare-card strong"><span>PORTFOLIO · EVIDENCE</span><h3>أمثلة على العمل</h3><p>يعرض نماذج مختارة من المشروعات أو الأعمال أو الإنجازات مع وصف يشرح السياق والمهارة.</p><ul><li>ماذا أنجزت بالفعل؟</li><li>ما الدليل الذي يمكن رؤيته؟</li></ul></div></div><div class="callout ">في حالة مريم: الـCV يذكر Excel وData Organisation؛ أما الـPortfolio فيعرض مشروع تنظيم سجلات المبيعات والجدول الملخص.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا تمييز تعليمي بين الوثيقتين لتوضيح وظيفة Portfolio. لا يغير ذلك قائمة الأقسام الرسمية الواردة في المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> ارجع إلى CV مريم من الوحدة السابقة، ثم انتقل إلى المشروع نفسه. أوضح أن الـPortfolio يضيف دليلًا بصريًا إلى ما ذكره الـCV.</div>
+</section><section class="slide" data-title="الأنواع الثلاثة للـPortfolio" data-section="PORTFOLIO · TYPES" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">08</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO · TYPES</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">الأنواع الثلاثة للـPortfolio</h1><p class="subtitle" dir="auto">المصدر يذكر ثلاثة أشكال رئيسية</p></div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card portfolio-type"><div class="type-icon">▤</div><span class="card-tag">01 · PROJECT-BASED</span><b>قائم على المشروعات</b><p>يعرض مشروعات محددة، وما تم إنجازه في كل مشروع.</p><small>مثال: مشروع جامعي أو تطبيق أو دراسة حالة.</small></div><div class="info-card portfolio-type"><div class="type-icon">◈</div><span class="card-tag">02 · SKILLS-BASED</span><b>قائم على المهارات</b><p>ينظم الأدلة حول مهارات بعينها، ويعرض نماذج تثبت استخدامها.</p><small>مثال: Excel، كتابة، تصميم.</small></div><div class="info-card portfolio-type"><div class="type-icon">★</div><span class="card-tag">03 · ACHIEVEMENT-BASED</span><b>قائم على الإنجازات</b><p>يعرض إنجازات أو نتائج أو اعترافات يمكن التحقق منها.</p><small>مثال: شهادة مكتملة أو جائزة موثقة.</small></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> أنواع Portfolio كما وردت في المصدر: project-based, skills-based, achievement-based. الأمثلة المصاحبة توضيحية.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب تصنيف ثلاثة أمثلة شفهيًا: مشروع تخرج، تصميم، شهادة إتمام. ناقش لماذا قد يجمع Portfolio واحد أكثر من منطق.</div>
+</section><section class="slide" data-title="أي نوع يناسب مريم؟" data-section="CASE APPLICATION · PORTFOLIO TYPE" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">09</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · PORTFOLIO TYPE</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">أي نوع يناسب مريم؟</h1><p class="subtitle" dir="auto">نختار النوع بناءً على الأدلة المتاحة لا على الشكل</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel mint"><div class="eyebrow">BEST STARTING POINT</div><h2>Project-based</h2><p>لديها مشروع جامعي واحد موثق في الحالة: Sales Records Organisation.</p><h3>Supporting angle</h3><p>يمكن إظهار المهارات التي استخدمتها داخل المشروع: Basic Excel وData Organisation.</p></div><div class="panel"><h3>ما لا نملكه بعد</h3><ul><li>لا توجد شهادة مؤكدة.</li><li>لا توجد أعمال تطوعية موثقة.</li><li>لا توجد عينة كتابة أو تصميم مؤكدة.</li><li>لا توجد بيانات لمشروع ثانٍ.</li></ul></div></div><div class="callout ">الاختيار الحالي: <b>Project-based</b> مع إبراز المهارات داخل كل مشروع. نضيف أنواعًا أخرى عندما تتوفر أدلة حقيقية.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> مريم لديها مشروع واحد مؤكد في الحالة المستمرة. لا نفترض أنها تملك شهادات أو أعمالًا تطوعية أو تصميمات لم ترد في البيانات.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اسأل الطلاب ما نوع Portfolio الذي يناسبهم بناءً على أدلتهم الحالية. لا تجعل نوع Portfolio قالبًا ثابتًا؛ اربطه بنوع العمل المتاح.</div>
+</section><section class="slide" data-title="ماذا يمكن للخريج الجديد أن يعرض؟" data-section="PORTFOLIO · FRESH GRADUATES" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">10</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO · FRESH GRADUATES</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">ماذا يمكن للخريج الجديد أن يعرض؟</h1><p class="subtitle" dir="auto">المصدر يذكر خمسة أمثلة على عناصر Portfolio</p></div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card "><span class="card-tag">01 · ACADEMIC PROJECTS</span><b>مشروعات أكاديمية</b><p>مشروع مادة أو تخرج أو بحث أو تطبيق جامعي.</p></div><div class="info-card "><span class="card-tag">02 · VOLUNTEER WORK</span><b>عمل تطوعي</b><p>مساهمة موثقة أو نشاط تطوعي شاركت فيه.</p></div><div class="info-card "><span class="card-tag">03 · CERTIFICATES</span><b>شهادات</b><p>شهادات إتمام أو اعتماد حقيقية.</p></div><div class="info-card "><span class="card-tag">04 · WRITING SAMPLES</span><b>عينات كتابة</b><p>مقال أو تقرير أو ملخص أو كتابة مهنية من عملك.</p></div><div class="info-card "><span class="card-tag">05 · DESIGN WORK</span><b>أعمال تصميم</b><p>تصميمات أو نماذج مرئية أنشأتها بنفسك.</p></div><div class="info-card "><span class="card-tag">SELECT WITH CARE</span><b>اختر بعناية</b><p>لا تضف عنصرًا لمجرد ملء الصفحة. اختر ما يخدم هدفك المهني.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> قائمة العناصر الخمسة مستمدة من المصدر: academic projects, volunteer work, certificates, writing samples, design work.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من كل طالب اختيار عنصر واحد لديه بالفعل. إذا لم يكن لديه مشروع أو شهادة، ناقش ما يمكنه جمعه لاحقًا دون اختلاق محتوى.</div>
+</section><section class="slide" data-title="هل يصلح هذا العنصر للـPortfolio؟" data-section="EVIDENCE · QUALITY CHECK" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">11</span><span class="section-label">GET HIRED · MODULE 06 · EVIDENCE · QUALITY CHECK</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">هل يصلح هذا العنصر للـPortfolio؟</h1><p class="subtitle" dir="auto">اختبر كل عنصر قبل وضعه في الصفحة</p></div>
+<main class="body" dir="rtl"><div class="prompt-steps"><div class="prompt-step"><strong>01 · REAL</strong><p>هل العنصر حقيقي؟ هل شاركت فيه فعلًا؟</p></div><div class="prompt-step"><strong>02 · RELEVANT</strong><p>هل يوضح مهارة أو اهتمامًا مرتبطًا بهدفك؟</p></div><div class="prompt-step"><strong>03 · EXPLAINABLE</strong><p>هل تستطيع شرح دورك وما الذي أنجزته؟</p></div></div><div class="callout ">إذا لم تستطع شرح مساهمتك أو إثبات العنصر، فلا تعرضه باعتباره إنجازًا مكتملًا.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا اختبار مراجعة تدريبي مشتق من هدف عرض الأدلة. ليس قائمة رسمية مستقلة في المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض عنصرًا عامًا مثل "مهارات القيادة" ثم اطلب من الطلاب اقتراح دليل ملموس. لا تقبل العبارات العامة دون مثال.</div>
+</section><section class="slide" data-title="جرد الأدلة في حالة مريم" data-section="CASE APPLICATION · EVIDENCE INVENTORY" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">12</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · EVIDENCE INVENTORY</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">جرد الأدلة في حالة مريم</h1><p class="subtitle" dir="auto">نحدد ما يمكن عرضه وما يحتاج إلى استكمال</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel mint"><div class="eyebrow">CONFIRMED · متاح</div><ul><li>مشروع جامعي: Sales Records Organisation.</li><li>استخدام Microsoft Excel لتنظيم السجلات.</li><li>إعداد جدول ملخص.</li><li>مهارات: Basic Excel وData Organisation.</li></ul></div><div class="panel gold"><div class="eyebrow">MISSING · يحتاج بيانات</div><ul><li>اسم الجامعة وتاريخ المشروع.</li><li>ملف أو صورة للجدول الملخص.</li><li>مشروع ثانٍ أو ثالث حقيقي.</li><li>شهادات أو تطوع أو عينات أخرى إن وجدت.</li></ul></div></div><div class="callout "><b>قاعدة:</b> نبدأ بما نعرفه، ونضع علامة واضحة على ما يحتاج إلى استكمال. لا نملأ الفراغات بتخمينات.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المعلومات المؤكدة محدودة عمدًا. ملف العمل أو صورة الجدول لم يردا في الحالة، لذلك لا ندّعي وجود مرفق فعلي.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب وضع علامة على كل عنصر: متاح الآن / يحتاج إلى استكمال / غير موجود. هذا الجرد يسبق استخدام أي أداة AI.</div>
+</section><section class="slide" data-title="الهيكل الرسمي للـPortfolio" data-section="PORTFOLIO · STRUCTURE" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">13</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO · STRUCTURE</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">الهيكل الرسمي للـPortfolio</h1><p class="subtitle" dir="auto">هذا هو التسلسل الذي يحدده المصدر</p></div>
+<main class="body" dir="rtl"><div class="panel"><div class="portfolio-flow"><div class="flow-item"><b>01 · COVER</b><span>الغلاف</span></div><div class="flow-item"><b>02 · ABOUT ME</b><span>نبذة قصيرة</span></div><div class="flow-item"><b>03 · SKILLS</b><span>المهارات</span></div><div class="flow-item"><b>04 · PROJECTS</b><span>2–3 مشروعات</span></div><div class="flow-item"><b>05 · CERTIFICATIONS</b><span>الشهادات</span></div><div class="flow-item"><b>06 · CONTACT</b><span>التواصل</span></div></div></div><div class="callout ">المصدر يذكر ترتيب الأقسام: Cover page → About me → Skills → Projects (2–3) → Certifications → Contact.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> حافظ على ترتيب الأقسام كما ورد في المصدر. عدد المشروعات المستهدف في الهيكل هو 2–3، وليس شرطًا أن نخترعها إذا كانت غير متاحة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض التسلسل كاملًا قبل البدء بالتصميم. وضّح أن المسودة قد تتضمن حقولًا معلّمة للاستكمال، لكن يجب أن يسعى الطالب لإضافة 2–3 مشروعات حقيقية.</div>
+</section><section class="slide" data-title="كيف نوزع الهيكل على صفحتين؟" data-section="TWO-PAGE BLUEPRINT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">14</span><span class="section-label">GET HIRED · MODULE 06 · TWO-PAGE BLUEPRINT</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">كيف نوزع الهيكل على صفحتين؟</h1><p class="subtitle" dir="auto">نحول ترتيب الأقسام إلى مسودة قابلة للإنجاز</p></div>
+<main class="body" dir="rtl"><div class="sheet-grid"><div class="portfolio-sheet"><div class="sheet-kicker">PAGE 01 · INTRODUCTION</div><h3>Cover</h3><div class="sheet-section">ABOUT ME</div><p>نبذة قصيرة توضح الخلفية والاهتمام المهني.</p><div class="sheet-section">SKILLS</div><p>المهارات التي يمكن إثباتها.</p><div class="sheet-footer"><span>PAGE 01</span><span>INTRODUCTION</span></div></div><div class="portfolio-sheet"><div class="sheet-kicker">PAGE 02 · EVIDENCE</div><div class="sheet-section">PROJECTS · 2–3</div><p>مشروعات موصوفة ومرفقة بأدلة عند توفرها.</p><div class="sheet-section">CERTIFICATIONS</div><p>الشهادات المكتملة فقط.</p><div class="sheet-section">CONTACT</div><p>وسائل تواصل وروابط صالحة.</p><div class="sheet-footer"><span>PAGE 02</span><span>EVIDENCE</span></div></div></div><div class="callout ">هذا توزيع تعليمي مقترح للصفحتين، وليس تقسيم صفحات حرفيًا مفروضًا من المصدر. يمكن أن يمتد الملف لاحقًا إذا احتاجت المشروعات إلى مساحة إضافية.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يحدد تسلسل الأقسام ومخرج صفحتين على الأقل، لكنه لا يحدد توزيعًا إلزاميًا لكل قسم على صفحة بعينها. هذا نموذج توزيع عملي.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> وضح أن الصفحة الثانية قد تحتاج مساحة أكبر إذا كانت المشروعات متعددة. لا تصغر الخط فقط لإجبار كل شيء على صفحتين.</div>
+</section><section class="slide" data-title="القسم الأول: Cover Page" data-section="PORTFOLIO STRUCTURE · COVER" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">15</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO STRUCTURE · COVER</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">القسم الأول: Cover Page</h1><p class="subtitle" dir="auto">الغلاف يعرّف الملف وصاحبه بسرعة</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel"><h3>ماذا نضع؟</h3><ul><li>الاسم المهني.</li><li>المجال أو الدور المستهدف.</li><li>عنوان واضح: Professional Portfolio.</li><li>عنصر بصري بسيط يخدم الهوية.</li></ul></div><div class="panel blue"><h3>ما الذي نتجنبه؟</h3><ul><li>عنوان مبهم لا يشرح محتوى الملف.</li><li>صور زخرفية لا تضيف معنى.</li><li>معلومات اتصال غير صحيحة.</li><li>ادعاءات أكبر من الأدلة.</li></ul></div></div><div class="callout ">الغلاف ليس إعلانًا مبالغًا فيه؛ هو مدخل واضح إلى الأدلة الموجودة داخل الملف.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> Cover page هو أول عنصر في ترتيب المصدر. تفاصيل اختيار المحتوى هنا إرشادات تصميمية مساعدة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض غلافًا واضحًا مقابل غلاف مزدحم. اطلب من الطلاب ذكر ما يستطيعون فهمه خلال ثوانٍ قليلة.</div>
+</section><section class="slide" data-title="تطبيق 01: نبني غلاف مريم" data-section="CASE APPLICATION · COVER" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">16</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · COVER</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">تطبيق 01: نبني غلاف مريم</h1><p class="subtitle" dir="auto">نستخدم فقط الاسم والمجال المستهدف المعروفين</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div class="portfolio-sheet"><div class="sheet-kicker">PROFESSIONAL PORTFOLIO</div><div style="padding:32px 8px 22px"><div style="font:900 30px/1.2 Arial,sans-serif;color:#123b55;direction:ltr;text-align:left">Maryam Ahmed</div><div style="font:700 16px/1.4 Arial,sans-serif;color:#0a7776;direction:ltr;text-align:left;margin-top:8px">COMMERCE GRADUATE</div><div style="font:15px/1.5 Arial,sans-serif;color:#5b7380;direction:ltr;text-align:left;margin-top:8px">Entry-Level Operations</div><div style="height:5px;width:72px;background:#d8ae55;border-radius:6px;margin:24px 0"></div><p style="font:14px Arial,sans-serif;direction:ltr;text-align:left">Selected academic project and skills evidence</p></div><div class="sheet-footer"><span>MARYAM AHMED</span><span>COVER</span></div></div><div class="portfolio-result-note"><h3>لماذا هذا الغلاف؟</h3><p>الاسم واضح، والمجال المستهدف محدد، والعنوان يوضح أن الملف Portfolio.</p><p><b>ما لم نضفه:</b> صورة شخصية أو جامعة أو بريد إلكتروني؛ لأنها غير متاحة في الحالة.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مخرج تصميمي افتراضي للغلاف. لا يتضمن صورة شخصية أو بيانات اتصال لم ترد في ملف الحالة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> نفذ أمام الطلاب اختيار غلاف بسيط. اطلب منهم مقارنة الغلاف مع CV مريم: هل الاسم والمجال متسقان؟</div>
+</section><section class="slide" data-title="القسم الثاني: About Me" data-section="PORTFOLIO STRUCTURE · ABOUT ME" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">17</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO STRUCTURE · ABOUT ME</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">القسم الثاني: About Me</h1><p class="subtitle" dir="auto">نبذة قصيرة داخل Portfolio وليست Professional Bio كاملة</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel"><h3>الغرض</h3><p>تساعد الزائر على فهم خلفيتك المهنية وما الذي سيشاهده في ملف الأعمال.</p><ul><li>خلفيتك أو تخصصك.</li><li>اهتمامك المهني.</li><li>نوع العمل أو المشروعات المعروضة.</li></ul></div><div class="panel gold"><h3>حدود هذه الجلسة</h3><p>نكتب نبذة قصيرة مناسبة لصفحة Portfolio. لا ننفذ Professional Bio من 80–100 كلمة أو LinkedIn About هنا؛ فهما في جلسة Business English.</p></div></div><div class="callout ">لا تخلط بين About Me القصيرة في Portfolio وبين المخرج المستقل Professional Bio.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يذكر About Me ضمن هيكل Portfolio، كما يخصص لاحقًا جلسة مستقلة لكتابة Professional Bio وLinkedIn About. نحافظ على هذا الفرق.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اشرح أن About Me هنا عنصر تعريفي مختصر داخل الملف. لا تحول الشريحة إلى درس كامل في كتابة Bio.</div>
+</section><section class="slide" data-title="تطبيق 02: About Me لمريم" data-section="CASE APPLICATION · ABOUT ME OUTPUT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">18</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · ABOUT ME OUTPUT</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">تطبيق 02: About Me لمريم</h1><p class="subtitle" dir="auto">صياغة مختصرة من الحقائق المتاحة</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div class="portfolio-sheet"><div class="sheet-kicker">ABOUT ME</div><h3>Maryam Ahmed</h3><p class="sheet-sub">COMMERCE GRADUATE · OPERATIONS INTEREST</p><p style="font-size:18px!important;line-height:1.7!important">I am a Commerce graduate interested in entry-level operations roles. My university project involved organising sales records in Microsoft Excel and preparing a summary table.</p><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>ABOUT</span></div></div><div class="portfolio-result-note"><h3>فحص الدقة</h3><ul><li>التخصص: موجود في الحالة.</li><li>الاهتمام بالعمليات: الوظيفة المستهدفة.</li><li>المشروع وExcel: موجودان في الحالة.</li><li>لا توجد صفات أو إنجازات مختلقة.</li></ul></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه صياغة تدريبية قصيرة لعنصر About Me، وليست Professional Bio الرسمية المطلوبة في جزء آخر من اليوم.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب تمييز كل معلومة في الفقرة وربطها ببطاقة الحالة. إذا لم يجدوا مصدرًا للمعلومة، تُحذف أو تُراجع.</div>
+</section><section class="slide" data-title="القسم الثالث: Skills" data-section="PORTFOLIO STRUCTURE · SKILLS" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">19</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO STRUCTURE · SKILLS</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">القسم الثالث: Skills</h1><p class="subtitle" dir="auto">اعرض المهارات في صورة قابلة للفهم والربط بالأدلة</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel mint"><h3>المهارة وحدها لا تكفي</h3><p>كتابة "Excel" في قائمة لا تشرح أين استخدمته أو ماذا أنجزت.</p></div><div class="panel"><h3>اربط المهارة بالمشروع</h3><p>أظهر المهارة في وصف المشروع أو في نموذج العمل الذي يوضح استخدامها.</p></div></div><div class="portfolio-flow"><div class="flow-item"><b>SKILL</b><span>Basic Excel</span></div><div class="flow-item"><b>ACTION</b><span>تنظيم سجلات المبيعات</span></div><div class="flow-item"><b>OUTPUT</b><span>جدول ملخص</span></div><div class="flow-item"><b>EVIDENCE</b><span>ملف أو صورة عند توفرها</span></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المهارات المؤكدة في حالة مريم: Basic Microsoft Excel وData Organisation. أما ملف الجدول نفسه فلم يُرفق، لذلك نطلب إضافته إن كان متاحًا.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اسأل: هل كتابة Advanced Excel ستكون مبررة؟ لا؛ الحالة تثبت Basic Excel فقط. اطلب من الطلاب عدم تضخيم مستويات المهارة.</div>
+</section><section class="slide" data-title="تطبيق 03: مخرج Skills لمريم" data-section="CASE APPLICATION · SKILLS OUTPUT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">20</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · SKILLS OUTPUT</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">تطبيق 03: مخرج Skills لمريم</h1><p class="subtitle" dir="auto">هكذا تظهر المهارات داخل صفحة Portfolio</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div class="portfolio-sheet"><div class="sheet-kicker">SKILLS</div><h3>Skills Demonstrated</h3><div class="sheet-section">DIGITAL / ORGANISATIONAL</div><span class="sheet-chip">Basic Microsoft Excel</span><span class="sheet-chip">Data Organisation</span><div class="sheet-section">PROJECT CONTEXT</div><p>Applied while organising university project sales records and preparing a summary table.</p><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>SKILLS</span></div></div><div class="portfolio-result-note"><h3>ما الذي يجعلها مقنعة؟</h3><p>كل مهارة مرتبطة بمشروع أو مهمة واضحة.</p><p>لا نضيف مستويات متقدمة أو برامج أخرى لم ترد في الحالة.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المخرج يعرض المهارتين المعروفتين فقط، ويربطهما بسياق المشروع. لا توجد درجة مهارة رقمية في المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب مراجعة كل Skill في ملفاتهم: هل توجد مهمة أو مشروع أو شهادة يثبتها؟</div>
+</section><section class="slide" data-title="القسم الرابع: Projects" data-section="PORTFOLIO STRUCTURE · PROJECTS" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">21</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO STRUCTURE · PROJECTS</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">القسم الرابع: Projects</h1><p class="subtitle" dir="auto">المشروعات هي قلب ملف الأعمال لدى كثير من الخريجين</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel"><h3>ما الذي نعرضه؟</h3><ul><li>عنوان المشروع.</li><li>السياق: جامعي، تطوعي، شخصي أو غيره.</li><li>وصف موجز لما تم عمله.</li><li>المهارة التي يوضحها.</li><li>صورة أو ملف أو رابط عند توفره.</li></ul></div><div class="panel blue"><h3>متطلب المصدر</h3><div class="eyebrow">PROJECTS · 2–3</div><h2 style="font-size:42px;margin:8px 0">2–3</h2><p>المصدر يذكر عرض مشروعين إلى ثلاثة مشروعات في هيكل Portfolio.</p></div></div><div class="callout ">لا تخلط بين عدد المشروعات في الهيكل وبين عدد الصفحات: المطلوب اليوم مسودة من صفحتين على الأقل، والهيكل يقترح 2–3 مشروعات.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يحدد Projects (2–3). في حالة مريم لدينا مشروع واحد مؤكد فقط؛ سنعرضه ونضع حقولًا واضحة لاستكمال مشروعات حقيقية أخرى.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> أكد أن ملء العدد بمشروعات وهمية يضر بمصداقية الملف. ساعد الطلاب على التفكير في مشروع جامعي أو تطوعي أو شخصي حقيقي آخر.</div>
+</section><section class="slide" data-title="كيف نكتب Project Description؟" data-section="PROJECT DESCRIPTION · FOUNDATION" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">22</span><span class="section-label">GET HIRED · MODULE 06 · PROJECT DESCRIPTION · FOUNDATION</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">كيف نكتب Project Description؟</h1><p class="subtitle" dir="auto">نحتاج وصفًا يشرح المشروع والمهارة بلغة مهنية</p></div>
+<main class="body" dir="rtl"><div class="prompt-steps"><div class="prompt-step"><strong>01 · TOPIC</strong><p>ما موضوع المشروع؟</p></div><div class="prompt-step"><strong>02 · SKILL</strong><p>ما المهارة التي يوضحها؟</p></div><div class="prompt-step"><strong>03 · DESCRIPTION</strong><p>وصف مهني من ثلاث جمل باللغة الإنجليزية.</p></div></div><div class="callout ">المطلوب في Prompt المصدر محدد: <b>3-sentence description</b> و<b>professional English</b>.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر لا يطلب وصفًا مفتوحًا؛ بل يحدد ثلاث جمل بالإنجليزية تشرح مشروعًا جامعيًا وتُظهر مهارة معينة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> قبل فتح ChatGPT، اطلب من المتدربين صياغة الموضوع والمهارة بالعربية أو الإنجليزية. جودة المدخلات تحدد مدى ملاءمة الوصف.</div>
+</section><section class="slide" data-title="Prompt المصدر لكتابة وصف المشروع" data-section="AI WRITING TOOLS · SOURCE PROMPT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">23</span><span class="section-label">GET HIRED · MODULE 06 · AI WRITING TOOLS · SOURCE PROMPT</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Prompt المصدر لكتابة وصف المشروع</h1><p class="subtitle" dir="auto">نحافظ على نص الأمر كما ورد في الملف الأصلي</p></div>
+<main class="body" dir="rtl"><div class="prompt-box"><div class="prompt-label">SOURCE PROMPT · VERBATIM</div><pre>Write a 3-sentence description of a university project on [topic] that demonstrates [skill]. Use professional English.</pre><button class="copy-btn" data-copy="Write a 3-sentence description of a university project on [topic] that demonstrates [skill]. Use professional English.">نسخ Prompt المصدر</button></div><div class="grid grid-2"><div class="info-card "><span class="card-tag">[topic]</span><b>موضوع المشروع</b><p>استبدله باسم المشروع أو موضوعه الحقيقي.</p></div><div class="info-card "><span class="card-tag">[skill]</span><b>المهارة التي يوضحها</b><p>اختر مهارة استخدمتها فعلًا داخل المشروع.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> تم الحفاظ على نص Prompt كما ورد في المصدر: "Write a 3-sentence description of a university project on [topic] that demonstrates [skill]. Use professional English."</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تغير شرط الثلاث جمل أو شرط Professional English. دع المتدرب يحدد Topic وSkill قبل النسخ.</div>
+</section><section class="slide" data-title="نملأ Prompt المصدر بحالة مريم" data-section="CASE APPLICATION · PROMPT INPUT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">24</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · PROMPT INPUT</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">نملأ Prompt المصدر بحالة مريم</h1><p class="subtitle" dir="auto">نستبدل الحقول فقط ولا نغير المهمة</p></div>
+<main class="body" dir="rtl"><div class="prompt-box"><div class="prompt-label">PROMPT · MARYAM VERSION</div><pre id="maryam-prompt">Write a 3-sentence description of a university project on organising sales records using Microsoft Excel that demonstrates basic Excel and data-organisation skills. Use professional English.</pre><button class="copy-btn" data-copy="Write a 3-sentence description of a university project on organising sales records using Microsoft Excel that demonstrates basic Excel and data-organisation skills. Use professional English.">نسخ مثال مريم</button></div><div class="panel"><h3>خصص Prompt لمشروعك</h3><div class="builder-grid"><label>Topic · موضوع المشروع<input id="topic-field" placeholder="e.g. organising a survey dataset"></label><label>Skill · المهارة التي يوضحها<input id="skill-field" placeholder="e.g. data organisation"></label></div><button class="primary-btn" id="build-description-prompt" style="margin-top:10px">إنشاء Prompt الخاص بي</button><pre class="generated-prompt" id="description-prompt-output">سيظهر Prompt هنا بعد إدخال الموضوع والمهارة.</pre><button class="copy-btn" id="copy-description-prompt" disabled>نسخ Prompt الخاص بي</button></div><div class="callout ">Topic: <b>organising sales records using Microsoft Excel</b><br/>Skill: <b>basic Excel and data-organisation skills</b></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا تطبيق للـPrompt على المعلومات المتاحة في ملف مريم. لا نضيف أرقامًا أو نتائج غير معروفة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض كيف استبدلنا [topic] و[skill]. اطلب من المتدربين إعداد نسخة مماثلة لمشروع حقيقي لديهم.</div>
+</section><section class="slide" data-title="مخرج AI الأول: وصف مشروع مريم" data-section="CASE OUTPUT · AI DRAFT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">25</span><span class="section-label">GET HIRED · MODULE 06 · CASE OUTPUT · AI DRAFT</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج AI الأول: وصف مشروع مريم</h1><p class="subtitle" dir="auto">نموذج من ثلاث جمل — مسودة تحتاج إلى مراجعة</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div class="panel blue" dir="ltr" style="text-align:left"><div class="eyebrow">AI-GENERATED DRAFT · 3 SENTENCES</div><p style="font:clamp(18px,1.45vw,25px)/1.7 Arial,sans-serif!important;color:#17384c">Organised sales records as part of a university project in Commerce. Used Microsoft Excel to arrange the records and prepare a summary table. The project demonstrated basic Excel use and data-organisation skills.</p></div><div class="portfolio-result-note"><h3>ماذا نراجع؟</h3><ul><li>هل عدد الجمل ثلاث؟</li><li>هل المشروع جامعي؟</li><li>هل ذُكر Excel؟</li><li>هل ظهرت المهارات المحددة؟</li><li>هل أضاف AI نتيجة غير مثبتة؟</li></ul></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي مولّد بالاعتماد على حقائق الحالة، وليس نصًا من المصدر. يجب على المتدرب التحقق من أن كل جملة تصف ما فعله فعلًا.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تقل إن هذا هو الناتج الحتمي لـChatGPT أو Gemini. هو مثال على صياغة ممكنة. اطلب من الطلاب مقارنة مخرجات الأدوات إذا سمح الوقت والحسابات.</div>
+</section><section class="slide" data-title="Human Review: هل الوصف دقيق؟" data-section="PROJECT DESCRIPTION · REVIEW" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">26</span><span class="section-label">GET HIRED · MODULE 06 · PROJECT DESCRIPTION · REVIEW</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Human Review: هل الوصف دقيق؟</h1><p class="subtitle" dir="auto">راجع المعنى قبل تحسين الأسلوب</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel mint"><div class="eyebrow">SUPPORTED</div><ul><li>University project in Commerce.</li><li>Organised sales records.</li><li>Used Microsoft Excel.</li><li>Prepared a summary table.</li></ul></div><div class="panel gold"><div class="eyebrow">NOT SUPPORTED</div><ul><li>Improved sales by 25%.</li><li>Managed a team of five.</li><li>Built an automated dashboard.</li><li>Used Advanced Excel functions.</li></ul></div></div><div class="callout ">إذا لم ترد المعلومة في ملف الحالة أو دليل الطالب، لا تضفها حتى لو جعلت الوصف يبدو أقوى.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المراجعة البشرية هنا إجراء ضروري لضمان عدم اختلاق إنجازات أو أرقام. العناصر في العمود الثاني أمثلة على ادعاءات غير مثبتة في حالة مريم.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب تلوين كل عبارة: حقيقة مدعومة / تحتاج إلى تحقق / ادعاء غير مدعوم. اجعل الدقة أهم من اللغة المزخرفة.</div>
+</section><section class="slide" data-title="تطبيق 04: Project Card النهائي" data-section="CASE APPLICATION · PROJECT OUTPUT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">27</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · PROJECT OUTPUT</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">تطبيق 04: Project Card النهائي</h1><p class="subtitle" dir="auto">بعد المراجعة، نضع الوصف في بطاقة مشروع</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div class="portfolio-sheet"><div class="sheet-kicker">SELECTED PROJECT · 01</div><h3>Sales Records Organisation</h3><p class="sheet-sub">UNIVERSITY PROJECT · COMMERCE</p><div class="sheet-section">PROJECT DESCRIPTION</div><p>Organised sales records as part of a university project in Commerce. Used Microsoft Excel to arrange the records and prepare a summary table. The project demonstrated basic Excel use and data-organisation skills.</p><div class="sheet-section">SKILLS DEMONSTRATED</div><span class="sheet-chip">Basic Excel</span><span class="sheet-chip">Data Organisation</span><div class="placeholder">Evidence image / sample table — add only if available and permitted to share.</div><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>PROJECT 01</span></div></div><div class="portfolio-result-note"><h3>المخرج المكتمل</h3><p>عنوان واضح + سياق المشروع + وصف من ثلاث جمل + المهارات التي يوضحها.</p><p><b>الخطوة التالية:</b> إضافة صورة أو ملف للجدول إذا كان متاحًا ولا يحتوي بيانات خاصة.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه بطاقة مشروع قابلة للاستخدام في Portfolio. لا نعرض صورة ملف حقيقي لأن الحالة لا تتضمن ملفًا مرفقًا.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض البطاقة بعد صياغة الوصف. اسأل الطلاب: ما الذي يمكن إضافته كدليل مرئي؟ وما الذي يجب إخفاؤه لحماية بيانات الآخرين؟</div>
+</section><section class="slide" data-title="صلة Portfolio بمسار Data Analysis" data-section="DATA ANALYSIS PATHWAY CONNECTION" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">28</span><span class="section-label">GET HIRED · MODULE 06 · DATA ANALYSIS PATHWAY CONNECTION</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">صلة Portfolio بمسار Data Analysis</h1><p class="subtitle" dir="auto">المشروع البسيط يصبح دليلًا على طريقة التعامل مع البيانات</p></div>
+<main class="body" dir="rtl"><div class="panel blue"><div class="eyebrow">FROM DATA TO COMMUNICATED EVIDENCE</div><div class="portfolio-flow"><div class="flow-item"><b>RECORDS</b><span>سجلات المبيعات</span></div><div class="flow-item"><b>ORGANISE</b><span>ترتيب السجلات في Excel</span></div><div class="flow-item"><b>SUMMARISE</b><span>إعداد جدول ملخص</span></div><div class="flow-item"><b>PRESENT</b><span>شرح المشروع في Portfolio</span></div></div><p>هذا يوضح بداية سلسلة العمل: تنظيم البيانات ثم عرض ما تم إنجازه بوضوح.</p></div><div class="callout ">لا ندّعي أن مريم أجرت تحليلًا إحصائيًا أو أنشأت Dashboard؛ الحالة تثبت التنظيم وإعداد جدول ملخص فقط.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا الربط يوضح صلة المشروع بمسار Data Analysis دون إضافة مهارات أو مخرجات غير موجودة في الحالة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اسأل المتدربين: ما البيانات التي تعاملت معها؟ كيف نظمتها؟ ما المخرج الذي تستطيع عرضه؟ فرّق بين تنظيم البيانات والتحليل المتقدم.</div>
+</section><section class="slide" data-title="متطلب 2–3 مشروعات: كيف نتعامل مع الفجوة؟" data-section="SOURCE REQUIREMENT · PROJECT COUNT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">29</span><span class="section-label">GET HIRED · MODULE 06 · SOURCE REQUIREMENT · PROJECT COUNT</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">متطلب 2–3 مشروعات: كيف نتعامل مع الفجوة؟</h1><p class="subtitle" dir="auto">نحافظ على متطلب المصدر دون اختلاق أعمال</p></div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><span class="card-tag">PROJECT 01</span><b>Confirmed</b><p>Sales Records Organisation — مشروع مريم المتاح.</p></div><div class="info-card"><span class="card-tag">PROJECT 02</span><b>To be added</b><p>مشروع حقيقي آخر من الجامعة أو التطوع أو عمل شخصي.</p></div><div class="info-card"><span class="card-tag">PROJECT 03</span><b>Optional</b><p>مشروع ثالث إذا كان موجودًا ويدعم الهدف المهني.</p></div></div><div class="callout ">في نموذج مريم، لا نملأ Project 02 أو 03 ببيانات افتراضية. نتركهما كحقول استكمال، ونطلب من المتدرب إيجاد أدلة حقيقية.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يذكر 2–3 مشروعات. حالة مريم الحالية لا تحتوي إلا على مشروع واحد مؤكد؛ هذا اختلاف بين متطلب الهيكل والبيانات المتاحة في المثال، ويجب أن يبقى ظاهرًا.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تمنح Portfolio Builder badge على أساس وجود صفحات شكلية فقط؛ تحقق من وجود صفحتين مكتملتين كمسودة ومن أن المحتوى غير مختلق. ناقش إضافة مشروع ثانٍ حقيقي.</div>
+</section><section class="slide" data-title="القسم الخامس: Certifications" data-section="PORTFOLIO STRUCTURE · CERTIFICATIONS" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">30</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO STRUCTURE · CERTIFICATIONS</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">القسم الخامس: Certifications</h1><p class="subtitle" dir="auto">أضف الشهادات التي حصلت عليها بالفعل</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel"><h3>ما الذي يظهر؟</h3><ul><li>اسم الشهادة.</li><li>الجهة المانحة.</li><li>تاريخ أو سنة الإكمال عند توفرها.</li><li>رابط تحقق إذا كان متاحًا.</li></ul></div><div class="panel gold"><h3>ما الذي لا نفعله؟</h3><ul><li>لا نعرض دورة لم تكتمل كشهادة.</li><li>لا نخترع جهة مانحة أو تاريخًا.</li><li>لا نضع شعار جهة دون إذن أو حاجة.</li></ul></div></div><div class="callout ">إذا لم تكن لديك شهادات مكتملة، لا تختلقها. يمكن أن يبقى القسم فارغًا أو يُحذف في النسخة النهائية بحسب محتوى الملف.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> Certifications جزء من هيكل Portfolio في المصدر. حالة مريم لا تتضمن شهادة مؤكدة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اسأل الطلاب عن الشهادات المكتملة لا المسجلة فقط. اشرح أن هذا القسم لا يجب أن يتحول إلى قائمة دورات غير منتهية.</div>
+</section><section class="slide" data-title="تطبيق 05: قسم Certifications في مسودة مريم" data-section="CASE APPLICATION · CERTIFICATIONS OUTPUT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">31</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · CERTIFICATIONS OUTPUT</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">تطبيق 05: قسم Certifications في مسودة مريم</h1><p class="subtitle" dir="auto">نوضح النقص بدل ملء القسم بمعلومات وهمية</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div class="portfolio-sheet"><div class="sheet-kicker">CERTIFICATIONS</div><h3>Completed Certificates</h3><div class="placeholder">No completed certificate has been confirmed in the current case file.</div><p class="sheet-sub">Update this section only when a real certificate is available.</p><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>CERTIFICATIONS</span></div></div><div class="portfolio-result-note"><h3>لماذا أظهرنا النقص؟</h3><p>لأن المسودة التعليمية يجب أن توضح للطالب ما يحتاج إلى استكماله.</p><p>يمكن حذف القسم من النسخة المنشورة إذا لم توجد شهادات.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مخرج توضيحي لمسودة مريم فقط. لا يعني أن كل Portfolio يجب أن يحتوي على شهادة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> استخدم الشريحة لتعليم الطلاب أن الفراغ الصادق أفضل من معلومة مختلقة.</div>
+</section><section class="slide" data-title="القسم السادس: Contact" data-section="PORTFOLIO STRUCTURE · CONTACT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">32</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO STRUCTURE · CONTACT</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">القسم السادس: Contact</h1><p class="subtitle" dir="auto">اجعل التواصل ممكنًا دون كشف بيانات لا تحتاجها</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel mint"><h3>بيانات مناسبة</h3><ul><li>بريد مهني يمكن الوصول إليه.</li><li>رابط Portfolio أو LinkedIn إذا كان صالحًا.</li><li>مدينة أو دولة عند الحاجة.</li></ul></div><div class="panel gold"><h3>تجنب</h3><ul><li>رقم الهوية أو بيانات حساسة.</li><li>عنوان المنزل التفصيلي.</li><li>روابط خاصة لا تسمح بالمشاهدة.</li></ul></div></div><div class="callout ">قبل مشاركة الملف، افتح الرابط بنفسك في نافذة خاصة أو من حساب آخر للتأكد من أن الصلاحية تعمل كما تقصد.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> Contact هو القسم الأخير في هيكل المصدر. توصيات الخصوصية والتحقق من الرابط هي إرشادات عملية مساندة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تطلب من الطلاب عرض بريدهم أو أرقامهم الشخصية على الشاشة. يمكن استخدام بيانات تدريبية أثناء الشرح.</div>
+</section><section class="slide" data-title="تطبيق 06: Contact لمريم" data-section="CASE APPLICATION · CONTACT OUTPUT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">33</span><span class="section-label">GET HIRED · MODULE 06 · CASE APPLICATION · CONTACT OUTPUT</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">تطبيق 06: Contact لمريم</h1><p class="subtitle" dir="auto">نترك بيانات الاتصال غير المتاحة كحقول واضحة</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div class="portfolio-sheet"><div class="sheet-kicker">CONTACT</div><h3>Get in Touch</h3><p>[Professional Email]</p><p>[City, Country]</p><p>[LinkedIn URL — if available]</p><p>[Portfolio Link — after publishing]</p><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>CONTACT</span></div></div><div class="portfolio-result-note"><h3>حقول تحتاج إلى استكمال</h3><p>هذه البيانات غير موجودة في ملف الحالة. لا نستخدم بيانات وهمية تبدو حقيقية.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> مخرج تطبيقي يوضح مواضع البيانات الناقصة دون اختلاق بريد أو رابط أو مدينة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> ذكر الطلاب بأن الروابط يجب أن تكون عامة أو مشاركة بإذن صحيح، وأنهم يتحققون منها قبل إرسال الملف.</div>
+</section><section class="slide" data-title="Canva AI: من المحتوى إلى التصميم" data-section="CANVA AI · DESIGN FOUNDATIONS" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">34</span><span class="section-label">GET HIRED · MODULE 06 · CANVA AI · DESIGN FOUNDATIONS</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Canva AI: من المحتوى إلى التصميم</h1><p class="subtitle" dir="auto">المصدر يطلب اختيار القالب والألوان ومنطق التخطيط</p></div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card "><span class="card-tag">01 · TEMPLATE</span><b>اختيار القالب</b><p>قالب يناسب طبيعة Portfolio وعدد الصفحات والمحتوى.</p></div><div class="info-card "><span class="card-tag">02 · COLOR SCHEME</span><b>اختيار الألوان</b><p>ألوان متناسقة وتباين كافٍ لقراءة النصوص.</p></div><div class="info-card "><span class="card-tag">03 · LAYOUT LOGIC</span><b>منطق التخطيط</b><p>ترتيب الأقسام والعناوين والصور والمساحات.</p></div></div><div class="callout ">Canva AI يساعد في إنشاء التصميم، لكنه لا يقرر أي الأدلة تستحق العرض ولا يتحقق من صحة وصف المشروع.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يذكر استخدام Canva AI لاختيار templates وcolor schemes وlayout logic. شرح معايير الاختيار هنا إثراء تعليمي لهذه النقاط.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> قبل فتح Canva، اعرض على الطلاب محتوى الصفحتين. وضح أن اختيار القالب يأتي بعد فهم المحتوى، لا قبله.</div>
+</section><section class="slide" data-title="اختيار Template مناسب" data-section="CANVA AI · TEMPLATE SELECTION" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">35</span><span class="section-label">GET HIRED · MODULE 06 · CANVA AI · TEMPLATE SELECTION</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">اختيار Template مناسب</h1><p class="subtitle" dir="auto">القالب الجيد يخدم المحتوى ولا يزاحمه</p></div>
+<main class="body" dir="rtl"><div class="compare"><div class="compare-card weak"><span>WEAK TEMPLATE</span><h3>مزدحم بصريًا</h3><div class="design-board"><div class="block dark">TITLE · TITLE · TITLE</div><div class="block gold"><div class="line"></div><div class="line"></div><div class="line short"></div></div><div class="block"><div class="line"></div><div class="line"></div><div class="line"></div></div><div class="block teal">Icons · Shapes · Labels · Photos</div></div><p>عناصر كثيرة ومساحات غير متوازنة، فيصعب العثور على المشروع.</p></div><div class="compare-card strong"><span>BETTER TEMPLATE</span><h3>مرتب وواضح</h3><div class="design-board"><div class="block dark">PORTFOLIO TITLE</div><div class="block teal">ABOUT ME · SKILLS</div><div class="block"><div class="line"></div><div class="line short"></div></div><div class="block gold">PROJECT CARD</div></div><p>ترتيب واضح، عناوين متسقة، ومساحة كافية لعرض الأدلة.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المقارنة توضيحية وليست تقييمًا لقالب محدد داخل Canva. معاييرها مشتقة من هدف وضوح الملف ومنطق التخطيط.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اسأل الطلاب: أين ستذهب العين أولًا؟ هل يستطيع القارئ تمييز عنوان المشروع ومهارته؟</div>
+</section><section class="slide" data-title="Color Scheme: اختر ألوانًا تخدم القراءة" data-section="CANVA AI · COLOR SCHEME" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">36</span><span class="section-label">GET HIRED · MODULE 06 · CANVA AI · COLOR SCHEME</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Color Scheme: اختر ألوانًا تخدم القراءة</h1><p class="subtitle" dir="auto">لا تجعل الألوان تنافس النص</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel"><h3>تركيبة بسيطة مقترحة</h3><div style="display:flex;gap:8px;margin:16px 0;flex-wrap:wrap"><div style="width:85px;height:72px;border-radius:10px;background:#103d58"></div><div style="width:85px;height:72px;border-radius:10px;background:#0a8b85"></div><div style="width:85px;height:72px;border-radius:10px;background:#e7f2f5;border:1px solid #c9dce0"></div><div style="width:85px;height:72px;border-radius:10px;background:#fff;border:1px solid #c9dce0"></div></div><p>لون رئيسي + لون مساعد + خلفية هادئة + نص عالي التباين.</p></div><div class="panel mint"><h3>قواعد عملية</h3><ul><li>حافظ على تباين النص والخلفية.</li><li>كرر الألوان نفسها في الصفحتين.</li><li>استخدم اللون لإبراز العناوين لا كل عنصر.</li><li>اختبر القراءة على شاشة صغيرة.</li></ul></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يطلب اختيار color schemes لكنه لا يحدد ألوانًا بعينها. الألوان هنا مثال تدريبي قابل للتغيير.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض نفس النص بخلفية فاتحة وداكنة وتباين ضعيف. اطلب من الطلاب اختيار الأكثر قابلية للقراءة.</div>
+</section><section class="slide" data-title="Layout Logic: كيف ترتب الصفحة؟" data-section="CANVA AI · LAYOUT LOGIC" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">37</span><span class="section-label">GET HIRED · MODULE 06 · CANVA AI · LAYOUT LOGIC</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Layout Logic: كيف ترتب الصفحة؟</h1><p class="subtitle" dir="auto">التصميم الجيد يوضح العلاقة بين المعلومات</p></div>
+<main class="body" dir="rtl"><div class="design-demo"><div class="design-board"><div class="block dark"><b>NAME / PORTFOLIO TITLE</b></div><div class="block teal"><b>ABOUT ME</b><div class="line"></div><div class="line short"></div></div><div class="block"><b>SKILLS</b><div class="line short"></div></div><div class="block gold"><b>PROJECT CARD</b><div class="line"></div><div class="line short"></div></div></div><div><div class="grid grid-2"><div class="info-card "><span class="card-tag">HIERARCHY</span><b>التدرج</b><p>العنوان الأهم أكبر وأكثر وضوحًا.</p></div><div class="info-card "><span class="card-tag">ALIGNMENT</span><b>المحاذاة</b><p>العناصر المتشابهة تبدأ وتنتهي على خطوط متسقة.</p></div><div class="info-card "><span class="card-tag">SPACING</span><b>المساحات</b><p>اترك فراغًا كافيًا بين الأقسام.</p></div><div class="info-card "><span class="card-tag">CONSISTENCY</span><b>الاتساق</b><p>كرر نمط العناوين والبطاقات في الصفحتين.</p></div></div></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه مبادئ تصميمية مساندة لتوضيح layout logic الذي يذكره المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب الإشارة إلى أول عنوان وآخر عنصر في الصفحة. إذا كان ترتيب القراءة غير واضح، عدل التخطيط قبل إضافة الزخارف.</div>
+</section><section class="slide" data-title="Canva AI: سير العمل أمام المتدربين" data-section="CANVA AI · TRAINER DEMO" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">38</span><span class="section-label">GET HIRED · MODULE 06 · CANVA AI · TRAINER DEMO</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Canva AI: سير العمل أمام المتدربين</h1><p class="subtitle" dir="auto">من اختيار القالب إلى صفحتين قابلتين للمراجعة</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="activity-step"><span class="n">01</span><div><b>افتح Canva وابحث عن Portfolio</b><p>استعرض القوالب المناسبة لملف أعمال من صفحتين أو أكثر.</p></div></div><div class="activity-step"><span class="n">02</span><div><b>اختر Template واضحًا</b><p>تحقق من قابلية قراءة العناوين ومساحات المشروعات.</p></div></div><div class="activity-step"><span class="n">03</span><div><b>عدّل الألوان والتخطيط</b><p>استخدم نظام ألوان واحدًا وكرر نمط الأقسام.</p></div></div><div class="activity-step"><span class="n">04</span><div><b>أدخل المحتوى المراجع</b><p>انسخ وصف المشروع بعد مراجعته، لا قبل ذلك.</p></div></div><div class="activity-step"><span class="n">05</span><div><b>أنشئ الصفحة الثانية</b><p>أضف المشروعات والشهادات ووسائل الاتصال أو حقول الاستكمال.</p></div></div><div class="activity-step"><span class="n">06</span><div><b>راجع النسختين</b><p>تحقق من التناسق وعدم قص النصوص أو الصور.</p></div></div></div><div class="callout ">أسماء الأزرار وخصائص Canva AI قد تتغير. ركّز في الديمو على المهمة والقرار التصميمي، لا على حفظ مكان زر واحد.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه خطوات عرض عملية لتحقيق بنود المصدر: استخدام Canva AI، اختيار template، color scheme، وlayout logic.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> نفذ الديمو باستخدام حساب المدرب. لا تدخل بيانات شخصية حقيقية للطلاب على شاشة العرض. إذا لم تتوفر ميزة AI في الحساب، أكمل اختيار القالب وتعديله يدويًا.</div>
+</section><section class="slide" data-title="مخرج التصميم 01: الصفحة الأولى" data-section="CASE OUTPUT · CANVA PAGE 01" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">39</span><span class="section-label">GET HIRED · MODULE 06 · CASE OUTPUT · CANVA PAGE 01</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التصميم 01: الصفحة الأولى</h1><p class="subtitle" dir="auto">هذه هي النتيجة بعد ترتيب Cover وAbout Me وSkills</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div><div class="portfolio-sheet"><div class="sheet-kicker">PORTFOLIO · PAGE 01</div><h3>Maryam Ahmed</h3><p class="sheet-sub">COMMERCE GRADUATE · ENTRY-LEVEL OPERATIONS</p><div class="sheet-section">ABOUT ME</div><p>Commerce graduate interested in entry-level operations roles. Completed a university project organising sales records in Microsoft Excel and preparing a summary table.</p><div class="sheet-section">SKILLS</div><span class="sheet-chip">Basic Microsoft Excel</span><span class="sheet-chip">Data Organisation</span><div class="sheet-section">SELECTED PROJECT</div><div class="project-card"><strong>Sales Records Organisation</strong><p>University project · Microsoft Excel</p><p>Organised sales records and prepared a summary table.</p></div><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>01</span></div></div></div><div class="portfolio-result-note"><h3>ما الذي اكتمل؟</h3><ul><li>غلاف بالاسم والمجال.</li><li>About Me قصيرة.</li><li>مهارات مثبتة.</li><li>مشروع أول ظاهر كمعاينة.</li></ul><p><b>ما الذي ينقص؟</b> أي تاريخ أو ملف بصري للمشروع غير متاح بعد.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> معاينة تصميمية لصفحة أولى في مسودة مريم. تم بناء النص من المعلومات المتاحة في الحالة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> قارن الصفحة مع المخطط السابق. اسأل الطلاب: هل كل عنصر يخدم غرضًا؟ هل يوجد ازدحام أو معلومة غير مؤكدة؟</div>
+</section><section class="slide" data-title="مخرج التصميم 02: الصفحة الثانية" data-section="CASE OUTPUT · CANVA PAGE 02" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">40</span><span class="section-label">GET HIRED · MODULE 06 · CASE OUTPUT · CANVA PAGE 02</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التصميم 02: الصفحة الثانية</h1><p class="subtitle" dir="auto">المشروعات والشهادات والتواصل مع حقول الاستكمال</p></div>
+<main class="body" dir="rtl"><div class="portfolio-result"><div><div class="portfolio-sheet"><div class="sheet-kicker">PORTFOLIO · PAGE 02</div><div class="sheet-section">PROJECTS</div><div class="project-card"><strong>01 · Sales Records Organisation</strong><p>Organised sales records as part of a university project in Commerce. Used Microsoft Excel to arrange the records and prepare a summary table. The project demonstrated basic Excel use and data-organisation skills.</p></div><div class="placeholder">02 · Add a second real project — title, evidence and skill demonstrated</div><div class="placeholder">03 · Optional third project — include only if you have real evidence</div><div class="sheet-section">CERTIFICATIONS</div><div class="placeholder">Add completed certificates only. No certificate is confirmed in this case file.</div><div class="sheet-section">CONTACT</div><p>[Professional Email] · [City, Country]</p><p>[LinkedIn URL / Portfolio Link — if available]</p><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>02</span></div></div></div><div class="portfolio-result-note"><h3>ما الذي اكتمل؟</h3><ul><li>مشروع واحد بوصف من ثلاث جمل.</li><li>حقلا Project 02 و03 للاستكمال.</li><li>قسم شهادات لا يحتوي ادعاءات.</li><li>حقول اتصال واضحة.</li></ul><p>هذه مسودة صادقة، وليست Portfolio نهائيًا جاهزًا للنشر قبل استكمال البيانات.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> تظهر الصفحة الثانية مشروعًا واحدًا مؤكدًا، مع حقول واضحة للمشروعات الأخرى والشهادات وبيانات الاتصال غير المتاحة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اشرح الفرق بين مسودة مكتملة الهيكل وملف مكتمل المحتوى. على الطالب إضافة أدلة حقيقية قبل النشر.</div>
+</section><section class="slide" data-title="Gamma.app: خيار لملف رقمي أكثر ديناميكية" data-section="GAMMA.APP" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">41</span><span class="section-label">GET HIRED · MODULE 06 · GAMMA.APP</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Gamma.app: خيار لملف رقمي أكثر ديناميكية</h1><p class="subtitle" dir="auto">أداة AI للـPortfolio والعروض التقديمية كما يذكر المصدر</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel blue"><div class="eyebrow">GAMMA.APP</div><h2>AI-powered portfolio & presentation tool</h2><p>يمكن استخدامه لإنشاء Portfolio رقمي أو عرض أكثر ديناميكية بدل الاكتفاء بصفحات ثابتة.</p></div><div class="panel"><h3>متى نذكره؟</h3><ul><li>عندما نريد عرضًا رقميًا قابلًا للتصفح.</li><li>عندما يناسب المحتوى شكل العرض التقديمي.</li><li>عندما نحتاج إلى بديل أو مكمّل للتصميم الثابت.</li></ul></div></div><div class="callout ">النشاط الرسمي في المصدر يطلب بناء الصفحات باستخدام <b>Canva + AI-generated descriptions</b>. Gamma.app أداة إضافية مذكورة في المحتوى، وليست بديلًا يغير المخرج الرسمي.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يصف Gamma.app بأنها أداة Portfolio وعروض مدعومة بالذكاء الاصطناعي لملف رقمي أكثر ديناميكية. لا يحددها كأداة النشاط الأساسية.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض Gamma.app كخيار إضافي إذا توفر اتصال وحساب. لا تحول النشاط الرسمي من Canva إلى Gamma.</div>
+</section><section class="slide" data-title="حفظ Portfolio بصيغة PDF" data-section="SAVE &amp; SHARE · PDF" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">42</span><span class="section-label">GET HIRED · MODULE 06 · SAVE &amp; SHARE · PDF</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">حفظ Portfolio بصيغة PDF</h1><p class="subtitle" dir="auto">الملف يجب أن يحافظ على الشكل عند فتحه خارج Canva</p></div>
+<main class="body" dir="rtl"><div class="portfolio-flow"><div class="flow-item"><b>01 · EXPORT</b><span>تنزيل PDF</span></div><div class="flow-item"><b>02 · OPEN</b><span>افتح الملف</span></div><div class="flow-item"><b>03 · INSPECT</b><span>راجع الصفحات</span></div><div class="flow-item"><b>04 · FIX</b><span>أصلح أي قص أو خطأ</span></div></div><div class="callout ">بعد التصدير، لا تفترض أن الملف سليم لمجرد أن المعاينة داخل Canva كانت جيدة. افتح PDF وتحقق من الصفحتين والنصوص والروابط.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> حفظ ومشاركة Portfolio بصيغة PDF مذكوران في المصدر. خطوات التحقق إضافات عملية قبل التسليم.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> نفذ التصدير أمام الطلاب إذا كان الحساب متاحًا. افتح الملف الناتج وتحقق من عدد الصفحات ووضوح الخطوط.</div>
+</section><section class="slide" data-title="Online Link Sharing: شارك الرابط الصحيح" data-section="SAVE &amp; SHARE · ONLINE LINK" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">43</span><span class="section-label">GET HIRED · MODULE 06 · SAVE &amp; SHARE · ONLINE LINK</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Online Link Sharing: شارك الرابط الصحيح</h1><p class="subtitle" dir="auto">تأكد من أن الشخص الآخر يستطيع فتح الملف</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="panel mint"><h3>قبل الإرسال</h3><ul><li>الرابط يفتح الملف الصحيح.</li><li>صلاحية العرض مناسبة للمستلم.</li><li>لا يحتوي الملف على بيانات خاصة غير لازمة.</li><li>اسم الملف واضح ومهني.</li></ul></div><div class="panel"><h3>اختبار عملي</h3><div class="eyebrow">SHARE CHECK</div><p>انسخ الرابط، افتحه في نافذة خاصة أو من حساب آخر، وتأكد من إمكانية العرض دون طلب صلاحيات غير مقصودة.</p></div></div><div class="callout ">لا تضع رابطًا خاصًا لا يستطيع المدرب أو صاحب العمل فتحه. PDF ورابط المشاركة طريقتان يذكرهما المصدر.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يطلب PDF format وonline link sharing. التحقق من الصلاحيات إرشاد عملي لضمان نجاح المشاركة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من المتدربين فحص الرابط قبل إرساله. لا تطلب منهم نشر الملفات على حساب عام إذا لم يكونوا مرتاحين لذلك.</div>
+</section><section class="slide" data-title="مسودة مريم بعد التطبيق" data-section="CASE OUTPUT · TWO-PAGE DRAFT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">44</span><span class="section-label">GET HIRED · MODULE 06 · CASE OUTPUT · TWO-PAGE DRAFT</span></div><span class="module-pill">CASE OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مسودة مريم بعد التطبيق</h1><p class="subtitle" dir="auto">صفحتان مترابطتان — والمعلومات الناقصة ظاهرة</p></div>
+<main class="body" dir="rtl"><div class="sheet-grid"><div class="portfolio-sheet"><div class="sheet-kicker">PORTFOLIO · PAGE 01</div><h3>Maryam Ahmed</h3><p class="sheet-sub">COMMERCE GRADUATE · ENTRY-LEVEL OPERATIONS</p><div class="sheet-section">ABOUT ME</div><p>Commerce graduate interested in entry-level operations roles. Completed a university project organising sales records in Microsoft Excel and preparing a summary table.</p><div class="sheet-section">SKILLS</div><span class="sheet-chip">Basic Microsoft Excel</span><span class="sheet-chip">Data Organisation</span><div class="sheet-section">SELECTED PROJECT</div><div class="project-card"><strong>Sales Records Organisation</strong><p>University project · Microsoft Excel</p><p>Organised sales records and prepared a summary table.</p></div><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>01</span></div></div><div class="portfolio-sheet"><div class="sheet-kicker">PORTFOLIO · PAGE 02</div><div class="sheet-section">PROJECTS</div><div class="project-card"><strong>01 · Sales Records Organisation</strong><p>Organised sales records as part of a university project in Commerce. Used Microsoft Excel to arrange the records and prepare a summary table. The project demonstrated basic Excel use and data-organisation skills.</p></div><div class="placeholder">02 · Add a second real project — title, evidence and skill demonstrated</div><div class="placeholder">03 · Optional third project — include only if you have real evidence</div><div class="sheet-section">CERTIFICATIONS</div><div class="placeholder">Add completed certificates only. No certificate is confirmed in this case file.</div><div class="sheet-section">CONTACT</div><p>[Professional Email] · [City, Country]</p><p>[LinkedIn URL / Portfolio Link — if available]</p><div class="sheet-footer"><span>MARYAM AHMED · PORTFOLIO</span><span>02</span></div></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه معاينة متكاملة لمسودة مريم من صفحتين. المشروع الثاني والثالث وبيانات الشهادات والتواصل ما زالت حقول استكمال، لأن الحالة لا تحتوي بيانات عنها.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض الصفحتين معًا. اطلب من الطلاب تحديد ما هو جاهز وما يحتاج إلى استكمال. وضح أن Portfolio مريم ليس جاهزًا للنشر بعد.</div>
+</section><section class="slide" data-title="مراجعة الجودة قبل مشاركة Portfolio" data-section="PORTFOLIO · QUALITY REVIEW" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">45</span><span class="section-label">GET HIRED · MODULE 06 · PORTFOLIO · QUALITY REVIEW</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">مراجعة الجودة قبل مشاركة Portfolio</h1><p class="subtitle" dir="auto">نراجع المحتوى والتصميم والملف النهائي</p></div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card "><span class="card-tag">CONTENT</span><b>دقة المحتوى</b><p>كل مشروع ومهارة وشهادة حقيقية ويمكن شرحها.</p></div><div class="info-card "><span class="card-tag">STRUCTURE</span><b>وضوح الهيكل</b><p>الأقسام واضحة والتسلسل مفهوم من الغلاف إلى التواصل.</p></div><div class="info-card "><span class="card-tag">DESIGN</span><b>جودة التصميم</b><p>القالب والألوان والتخطيط يخدمون القراءة.</p></div><div class="info-card "><span class="card-tag">LANGUAGE</span><b>اللغة</b><p>وصف المشروع بالإنجليزية واضح ومهني ومراجع.</p></div><div class="info-card "><span class="card-tag">EVIDENCE</span><b>الأدلة</b><p>الصور والملفات المرفقة تخص العمل ولا تكشف بيانات خاصة.</p></div><div class="info-card "><span class="card-tag">SHARING</span><b>المشاركة</b><p>PDF سليم والرابط يعمل بصلاحية مناسبة.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه قائمة مراجعة تعليمية مشتقة من متطلبات المحتوى والتصميم والحفظ والمشاركة في المصدر. ليست Rubric رسمية مستقلة من المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من كل طالب مراجعة عمله قبل مشاركة الرابط. اجعل أي ملاحظة محددة وقابلة للتنفيذ.</div>
+</section><section class="slide" data-title="Portfolio Build Sprint: النشاط الرسمي" data-section="OFFICIAL ACTIVITY · PORTFOLIO BUILD SPRINT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">46</span><span class="section-label">GET HIRED · MODULE 06 · OFFICIAL ACTIVITY · PORTFOLIO BUILD SPRINT</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Portfolio Build Sprint: النشاط الرسمي</h1><p class="subtitle" dir="auto">ابنِ صفحتين على الأقل باستخدام Canva وأوصاف AI</p></div>
+<main class="body" dir="rtl"><div class="panel blue"><div class="eyebrow">ACTIVITY · SOURCE REQUIREMENT</div><h2 style="font-size:clamp(25px,2.2vw,38px);margin:7px 0">Build at least 2 portfolio pages</h2><p>باستخدام Canva + AI-generated descriptions. يقدم المدرب والأقران ملاحظات مباشرة أثناء التنفيذ.</p></div><div class="grid grid-3"><div class="info-card "><span class="card-tag">BUILD</span><b>صفحتان على الأقل</b><p>تطبيق هيكل Portfolio على محتوى المتدرب.</p></div><div class="info-card "><span class="card-tag">DESCRIBE</span><b>وصف AI</b><p>كتابة وصف مشروع من ثلاث جمل ومراجعته.</p></div><div class="info-card "><span class="card-tag">FEEDBACK</span><b>مراجعة مباشرة</b><p>المدرب والأقران يراجعون المحتوى والتصميم.</p></div></div><div class="badge-quest"><div class="star">★</div><div><b>Portfolio Builder Badge</b><p>تُمنح عند إكمال أول قسم من صفحتين.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> نشاط Portfolio Build Sprint ومتطلب صفحتين على الأقل والملاحظات المباشرة والـBadge عند إكمال أول قسم من صفحتين كلها واردة في المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> تحقق من إنجاز صفحتين فعليتين. امنح الشارة عند إكمال أول قسم من صفحتين، ثم ابدأ المراجعة. لا تجعل التصويت البصري بديلًا عن التحقق من صحة المحتوى.</div>
+</section><section class="slide" data-title="كيف ننفذ الـSprint داخل المجموعات؟" data-section="GROUP PRACTICE · LEARNING CYCLE" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">47</span><span class="section-label">GET HIRED · MODULE 06 · GROUP PRACTICE · LEARNING CYCLE</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">كيف ننفذ الـSprint داخل المجموعات؟</h1><p class="subtitle" dir="auto">كل مرحلة لها هدف تعليمي ومخرج قابل للفحص</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="activity-step"><span class="n">01</span><div><b>جرد الأدلة</b><p>كل متدرب يختار مشروعًا حقيقيًا ومهارة يثبتها.</p></div></div><div class="activity-step"><span class="n">02</span><div><b>كتابة الوصف</b><p>يملأ Prompt المصدر ويولد وصفًا من ثلاث جمل.</p></div></div><div class="activity-step"><span class="n">03</span><div><b>تصميم الصفحة الأولى</b><p>يختار القالب ويضع الغلاف وAbout Me وSkills.</p></div></div><div class="activity-step"><span class="n">04</span><div><b>تصميم الصفحة الثانية</b><p>يضع Projects وCertifications وContact.</p></div></div><div class="activity-step"><span class="n">05</span><div><b>مراجعة الزملاء</b><p>تبادل ملاحظات محددة على الدقة والوضوح والتصميم.</p></div></div><div class="activity-step"><span class="n">06</span><div><b>تعديل وعرض</b><p>يصلح المتدرب نقطة واحدة على الأقل ويعرض أفضل صفحة.</p></div></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه مراحل تنفيذية مقترحة لتنظيم نشاط المصدر. المتطلب الرسمي هو بناء صفحتين على الأقل باستخدام Canva وAI-generated descriptions مع feedback من المدرب والأقران.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> أوقف الشرح عند كل مرحلة، نفذ أمامهم أولًا، ثم دع المجموعات تطبق. لا تترك النشاط مفتوحًا دون هدف أو دليل إنجاز.</div>
+</section><section class="slide" data-title="Peer Feedback: كيف نراجع صفحات المجموعات؟" data-section="PEER REVIEW · GUILD VOTE" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">48</span><span class="section-label">GET HIRED · MODULE 06 · PEER REVIEW · GUILD VOTE</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">Peer Feedback: كيف نراجع صفحات المجموعات؟</h1><p class="subtitle" dir="auto">Guilds vote on the most visually compelling page</p></div>
+<main class="body" dir="rtl"><div class="peer-grid"><label class="peer-item"><input type="checkbox" class="peer-check"><span>هل الغلاف يوضح صاحب الملف ومجاله؟</span></label><label class="peer-item"><input type="checkbox" class="peer-check"><span>هل الأقسام مرتبة وسهلة التصفح؟</span></label><label class="peer-item"><input type="checkbox" class="peer-check"><span>هل وصف المشروع ثلاث جمل ومفهوم؟</span></label><label class="peer-item"><input type="checkbox" class="peer-check"><span>هل المهارات مرتبطة بمشروع أو دليل؟</span></label><label class="peer-item"><input type="checkbox" class="peer-check"><span>هل الألوان والخطوط واضحة ومتسقة؟</span></label><label class="peer-item"><input type="checkbox" class="peer-check"><span>هل الصور أو النماذج ذات صلة؟</span></label><label class="peer-item"><input type="checkbox" class="peer-check"><span>هل توجد معلومات غير مؤكدة؟</span></label><label class="peer-item"><input type="checkbox" class="peer-check"><span>هل الصفحة الأكثر جاذبية ما زالت مقروءة؟</span></label></div><div class="checklist-head"><b>Peer Review Progress</b><span id="peer-count">0 / 8</span></div><div class="progress-track"><span id="peer-progress"></span></div><div class="callout ">بعد المراجعة، تصوّت Guilds على الصفحة الأكثر إقناعًا بصريًا، مع الحفاظ على شرط أن تكون المعلومات دقيقة وقابلة للقراءة.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يذكر أن Guilds تصوت على الصفحة الأكثر جاذبية بصريًا. عناصر القائمة هنا أداة مراجعة تدريبية مساعدة وليست بنودًا رسمية في المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> نظم التصويت بعد الملاحظات والتعديلات، وليس قبلها. اطلب سببًا واضحًا للتصويت، ولا تسمح للجمال البصري بتغطية الأخطاء الواقعية.</div>
+</section><section class="slide" data-title="اختبر فهمك قبل التسليم" data-section="KNOWLEDGE CHECK" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">49</span><span class="section-label">GET HIRED · MODULE 06 · KNOWLEDGE CHECK</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">اختبر فهمك قبل التسليم</h1><p class="subtitle" dir="auto">اختر الإجابة ثم اشرح السبب</p></div>
+<main class="body" dir="rtl"><div class="quiz-wrap"><div class="quiz-q" data-answer="b"><h3>1. ما أفضل استخدام لوصف مشروع باستخدام AI؟</h3><button data-choice="a">إضافة نتائج رقمية حتى يبدو المشروع أقوى.</button><button data-choice="b">صياغة وصف من ثلاث جمل بناءً على موضوع ومهارة حقيقيين ثم مراجعته.</button><button data-choice="c">نسخ النص دون التأكد من صحته.</button><p class="feedback"></p></div><div class="quiz-q" data-answer="c"><h3>2. مريم لديها مشروع واحد مؤكد. ماذا نفعل مع Project 02؟</h3><button data-choice="a">نخترع مشروعًا جامعيًا ثانيًا.</button><button data-choice="b">نكرر المشروع نفسه باسم مختلف.</button><button data-choice="c">نترك حقلًا واضحًا ونطلب مشروعًا حقيقيًا إضافيًا.</button><p class="feedback"></p></div><div class="quiz-q" data-answer="a"><h3>3. ما المخرج الرسمي لجلسة AI Tools؟</h3><button data-choice="a">2-page digital portfolio draft باستخدام Canva وأوصاف AI.</button><button data-choice="b">Professional Bio وLinkedIn About.</button><button data-choice="c">Digital Audit results.</button><p class="feedback"></p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> الإجابات: 1-b، 2-c، 3-a. اطلب من الطالب تفسير الإجابة وربطها بمتطلبات المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> استخدم الأسئلة لتقييم الفهم بعد النشاط. إذا أخطأ الطالب في السؤال الثاني، ارجع إلى الفرق بين متطلب 2–3 مشروعات والبيانات المتاحة في الحالة.</div>
+</section><section class="slide" data-title="قبل أن تسلّم المسودة" data-section="FINAL DELIVERABLE CHECK" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">50</span><span class="section-label">GET HIRED · MODULE 06 · FINAL DELIVERABLE CHECK</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">قبل أن تسلّم المسودة</h1><p class="subtitle" dir="auto">قائمة مراجعة المخرج اليومي</p></div>
+<main class="body" dir="rtl"><div class="checklist-box"><div class="checklist-head"><b>2-Page Portfolio Draft Checklist</b><span id="final-count">0 / 7</span></div><div class="checklist-grid"><label class="check-item"><input type="checkbox" class="final-check"><b>صفحتان على الأقل في Canva</b></label><label class="check-item"><input type="checkbox" class="final-check"><b>Cover + About Me + Skills</b></label><label class="check-item"><input type="checkbox" class="final-check"><b>Projects section واضح (2–3 مستهدفة)</b></label><label class="check-item"><input type="checkbox" class="final-check"><b>وصف مشروع AI من ثلاث جمل</b></label><label class="check-item"><input type="checkbox" class="final-check"><b>كل المعلومات حقيقية ومراجعة</b></label><label class="check-item"><input type="checkbox" class="final-check"><b>PDF تم فتحه وفحصه</b></label><label class="check-item"><input type="checkbox" class="final-check"><b>رابط المشاركة يعمل أو تم حفظ نسخة PDF</b></label></div><div class="progress-track"><span id="final-progress"></span></div></div><div class="callout ">المخرج الرسمي: <b>2-page digital portfolio draft (Canva, AI-generated descriptions)</b>.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه قائمة تنفيذية للتحقق من مخرج المصدر. وجود مشروعين إلى ثلاثة جزء من هيكل Portfolio، ويجب استكماله بأعمال حقيقية.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اجعل الطالب يعرض الصفحتين ويشرح وصف المشروع. لا تعتمد على إشارة checkbox دون معاينة فعلية للملف.</div>
+</section><section class="slide" data-title="تكليف الاستكمال بعد الجلسة" data-section="TAKE-HOME · CONTINUE THE PORTFOLIO" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">51</span><span class="section-label">GET HIRED · MODULE 06 · TAKE-HOME · CONTINUE THE PORTFOLIO</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">تكليف الاستكمال بعد الجلسة</h1><p class="subtitle" dir="auto">حوّل المسودة إلى ملف أعمال يمكن عرضه بثقة</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card "><span class="card-tag">01 · COMPLETE EVIDENCE</span><b>استكمل المشروعات</b><p>أضف مشروعًا ثانيًا حقيقيًا، وثالثًا إذا توفر، مع أدلة مناسبة.</p></div><div class="info-card "><span class="card-tag">02 · VERIFY</span><b>راجع المحتوى</b><p>تحقق من الوصف والمهارات وأي شهادة أو تاريخ قبل النشر.</p></div><div class="info-card "><span class="card-tag">03 · EXPORT</span><b>صدر الملف</b><p>احفظ نسخة PDF وافتحها للتأكد من سلامة الصفحات.</p></div><div class="info-card "><span class="card-tag">04 · SHARE</span><b>جهز الرابط</b><p>أنشئ رابط عرض مناسبًا وتأكد من عمله.</p></div></div><div class="callout ">هذا تكليف استكمال مقترح للمدرب. المخرج الرسمي للجلسة يظل مسودة Portfolio من صفحتين على الأقل.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> التكليف يمدد العمل على المخرج الرسمي ولا يضيف Deliverable رسميًا جديدًا إلى المصدر.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> يمكن للطالب استخدام مشروع جامعي أو تطوعي أو كتابة أو تصميم حقيقي من القائمة التي يذكرها المصدر. لا تطلب نشر معلومات خاصة.</div>
+</section><section class="slide" data-title="ملف الأعمال الجيد لا يقول فقط إنك تستطيع" data-section="CLOSING · MY DIGITAL PRESENCE" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">52</span><span class="section-label">GET HIRED · MODULE 06 · CLOSING · MY DIGITAL PRESENCE</span></div><span class="module-pill">MY DIGITAL PRESENCE</span></header>
+<div class="heading"><h1 dir="auto">ملف الأعمال الجيد لا يقول فقط إنك تستطيع</h1><p class="subtitle" dir="auto">إنه يعرض دليلًا يساعد الآخرين على رؤية ما أنجزته</p></div>
+<main class="body" dir="rtl"><div class="panel blue"><div class="eyebrow">PORTFOLIO BUILDING · FINAL MODEL</div><div class="closing-grid"><div><b>EVIDENCE</b><span>ابدأ بعمل حقيقي</span></div><div><b>DESCRIPTION</b><span>اشرحه بوضوح</span></div><div><b>DESIGN</b><span>رتبه في Canva</span></div><div><b>REVIEW</b><span>تحقق من الدقة</span></div><div><b>SHARE</b><span>احفظ وشارك</span></div></div><p class="closing-line" style="margin-top:22px">Build it with evidence. Present it with clarity.</p></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> الخلاصة: اختيار أدلة حقيقية، وصفها باستخدام Prompt المصدر، تصميمها في Canva، ثم مراجعة PDF والرابط قبل المشاركة.</div><div class="trainer-note"><b>ملاحظة المدرّب:</b> اختم بطلب أن يذكر كل متدرب ما هو المشروع الذي سيضيفه إلى Portfolio، وما الدليل الذي يحتاج إلى تجهيزه.</div>
+</section></main>
+<footer class="navbar"><button id="prev" disabled>السابق</button><div class="nav-center"><span class="counter" id="counter">01 / 52</span><div class="progress"><span id="progress-fill"></span></div><span id="mode-label">وضع العرض</span></div><button id="next" class="primary">التالي</button></footer></div>
+<div id="overview-panel" role="dialog" aria-modal="true" aria-label="فهرس الشرائح"><div class="overview-inner"><div class="overview-head"><h2>فهرس Module 06 — MY DIGITAL PRESENCE</h2><input id="overview-search" type="search" placeholder="ابحث عن عنوان شريحة..."><button id="close-overview">إغلاق</button></div><div class="overview-grid" id="overview-list"></div></div></div><div class="toast" id="toast" role="status" aria-live="polite">تم النسخ</div>
+<script>
+(() => {
+ const slides=[...document.querySelectorAll('.slide')], $=id=>document.getElementById(id);
+ let current=0; const modes=[...document.querySelectorAll('[data-mode]')];
+ function showSlide(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>{const active=i===current;s.classList.toggle('active',active);s.setAttribute('aria-hidden',active?'false':'true')});$('counter').textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');$('progress-fill').style.width=((current+1)/slides.length*100)+'%';$('prev').disabled=current===0;$('next').disabled=current===slides.length-1;slides[current].scrollTop=0;}
+ $('prev').addEventListener('click',()=>showSlide(current-1));$('next').addEventListener('click',()=>showSlide(current+1));
+ function setMode(m){document.body.dataset.mode=m;document.body.classList.toggle('mode-study',m==='study');document.body.classList.toggle('mode-trainer',m==='trainer');modes.forEach(b=>b.classList.toggle('active',b.dataset.mode===m));$('mode-label').textContent=m==='presentation'?'وضع العرض':m==='study'?'مذاكرة الطالب':'ملاحظات المدرّب';}
+ modes.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+ const panel=$('overview-panel'), list=$('overview-list'), search=$('overview-search');
+ slides.forEach((s,i)=>{const b=document.createElement('button'),n=document.createElement('small'),t=document.createElement('span');n.textContent=String(i+1).padStart(2,'0');t.textContent=s.dataset.title||('Slide '+(i+1));b.append(n,t);b.addEventListener('click',()=>{showSlide(i);panel.style.display='none'});list.append(b)});
+ $('overview').addEventListener('click',()=>{panel.style.display='block';search.value='';filter('');search.focus()});$('close-overview').addEventListener('click',()=>panel.style.display='none');panel.addEventListener('click',e=>{if(e.target===panel)panel.style.display='none'});
+ function filter(q){q=q.trim().toLowerCase();[...list.children].forEach(b=>b.style.display=b.textContent.toLowerCase().includes(q)?'flex':'none')}search.addEventListener('input',e=>filter(e.target.value));
+ $('fullscreen').addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){toast('استخدم خيار ملء الشاشة في المتصفح.')}});
+ function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+ async function copyText(t,b){let ok=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);ok=true}}catch(e){}if(!ok){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.append(a);a.select();try{ok=document.execCommand('copy')}catch(e){}a.remove()}toast(ok?'تم النسخ':'تعذر النسخ تلقائيًا — حدد النص وانسخه');if(b&&ok){const old=b.textContent;b.textContent='تم النسخ';setTimeout(()=>b.textContent=old,1300)}}
+ document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b)copyText(b.dataset.copy,b)});
+ document.querySelectorAll('.quiz-q').forEach(q=>q.querySelectorAll('button[data-choice]').forEach(b=>b.addEventListener('click',()=>{const correct=b.dataset.choice===q.dataset.answer;q.querySelectorAll('button').forEach(x=>{x.classList.remove('correct','incorrect');if(x.dataset.choice===q.dataset.answer)x.classList.add('correct')});if(!correct)b.classList.add('incorrect');q.querySelector('.feedback').textContent=correct?'إجابة صحيحة. اشرح السبب.':'ليست الإجابة الأدق. راجع التفسير المرتبط بالسؤال.'})));
+ const buildPrompt=$('build-description-prompt');if(buildPrompt)buildPrompt.addEventListener('click',()=>{const topic=$('topic-field').value.trim()||'[topic]';const skill=$('skill-field').value.trim()||'[skill]';$('description-prompt-output').textContent='Write a 3-sentence description of a university project on '+topic+' that demonstrates '+skill+'. Use professional English.';$('copy-description-prompt').disabled=false;});
+ const copyPrompt=$('copy-description-prompt');if(copyPrompt)copyPrompt.addEventListener('click',()=>{if(!copyPrompt.disabled)copyText($('description-prompt-output').textContent,copyPrompt)});
+ function bindChecks(selector,countId,progressId){const xs=[...document.querySelectorAll(selector)];const update=()=>{const n=xs.filter(x=>x.checked).length;$(countId).textContent=n+' / '+xs.length;$(progressId).style.width=(n/xs.length*100)+'%'};xs.forEach(x=>x.addEventListener('change',update));update()}
+ bindChecks('.peer-check','peer-count','peer-progress');bindChecks('.final-check','final-count','final-progress');
+ document.addEventListener('keydown',e=>{const tag=(e.target&&e.target.tagName||'').toLowerCase();if(['input','textarea','select','button'].includes(tag)||e.target.isContentEditable){if(e.key==='Escape')panel.style.display='none';return}if(panel.style.display==='block'){if(e.key==='Escape')panel.style.display='none';return}if(e.key==='ArrowLeft'||e.key==='PageDown'||e.key===' '){e.preventDefault();showSlide(current+1)}else if(e.key==='ArrowRight'||e.key==='PageUp'){e.preventDefault();showSlide(current-1)}else if(e.key==='Home')showSlide(0);else if(e.key==='End')showSlide(slides.length-1);else if(e.key.toLowerCase()==='f')$('fullscreen').click();else if(e.key.toLowerCase()==='o')$('overview').click()});
+ showSlide(0);
+})();
+</script></body></html>
